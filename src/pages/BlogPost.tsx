@@ -191,7 +191,7 @@ export function BlogPost() {
         {/* Sidebar */}
         <aside className="lg:col-span-4 space-y-16">
           {/* Newsletter Signup */}
-          <Newsletter variant="brand" />
+          <Newsletter variant="brand" sidebar={true} />
 
           {/* Related Articles */}
           <div>

@@ -244,8 +244,6 @@ export function About() {
         <div className="max-w-7xl mx-auto px-6">
           <Newsletter 
             variant="light" 
-            title="Бюлетин за Русе" 
-            description="Получавайте нови анализи и идеи за икономическото развитие на Русе директно във Вашата поща, само когато има наистина важно съдържание." 
           />
         </div>
       </section>

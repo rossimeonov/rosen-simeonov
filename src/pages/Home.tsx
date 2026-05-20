@@ -275,8 +275,6 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <Newsletter 
             variant="light" 
-            title="Бюлетин за Русе" 
-            description="Получавайте първи анализи и идеи за икономическото развитие на Русе директно във Вашата поща." 
           />
         </div>
       </section>
