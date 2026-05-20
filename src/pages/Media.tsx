@@ -99,8 +99,8 @@ export function Media() {
            <p className="text-slate-500 font-light mb-12">
              Ако желаете да поканите Росен Симеонов за интервю, коментар или участие в събитие, моля използвайте формата за контакт или пишете на имейл.
            </p>
-           <a href="mailto:office@rosensimeonov.com" className="inline-block py-5 px-12 bg-brand-600 text-white font-black text-[10px] uppercase tracking-widest hover:bg-brand-700 transition-all shadow-xl">
-             office@rosensimeonov.com
+           <a href="mailto:info@rosensimeonov.com" className="inline-block py-5 px-12 bg-brand-600 text-white font-black text-[10px] uppercase tracking-widest hover:bg-brand-700 transition-all shadow-xl">
+             info@rosensimeonov.com
            </a>
         </div>
       </section>

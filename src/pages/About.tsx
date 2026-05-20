@@ -123,13 +123,24 @@ export function About() {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-6 shadow-2xl rounded-3xl group">
-              <div className="aspect-[3/2] bg-slate-100 overflow-hidden rounded-xl">
-                <img 
-                  src={IMAGES.about_achiever} 
-                  alt="Academic Achievement" 
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                />
+            <div className="grid grid-cols-2 gap-6 items-start">
+              <div className="bg-white p-4 shadow-xl rounded-2xl group">
+                <div className="aspect-[3/4] bg-slate-100 overflow-hidden rounded-xl">
+                  <img 
+                    src={IMAGES.about_achiever} 
+                    alt="Academic Achievement" 
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
+              </div>
+              <div className="bg-white p-4 shadow-xl rounded-2xl group mt-8 sm:mt-12">
+                <div className="aspect-[3/4] bg-slate-100 overflow-hidden rounded-xl">
+                  <img 
+                    src={IMAGES.about_graduation} 
+                    alt="MBA Graduation" 
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  />
+                </div>
               </div>
             </div>
           </div>

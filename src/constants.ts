@@ -8,20 +8,25 @@ const localImages = (import.meta as any).glob('./images/*', { eager: true }) as 
 /**
  * Помощна функция за автоматично превключване към локално качена снимка,
  * ако такава съществува в src/images/, в противен случай използва отдалечения линк.
+ * Поддържа указване на масив от файлови имена за гъвкаво търсене по приоритет.
  */
-function getLocalOrFallback(fileName: string, fallbackUrl: string): string {
-  const normalizedFileName = fileName.toLowerCase().trim();
+function getLocalOrFallback(fileNames: string | string[], fallbackUrl: string): string {
+  const names = Array.isArray(fileNames) ? fileNames : [fileNames];
   
-  // Търсене на съвпадение по име на файл в сканираните локални файлове
-  const matchingKey = Object.keys(localImages).find((filePath) => {
-    const nameFromPath = filePath.split('/').pop() || '';
-    return nameFromPath.toLowerCase().trim() === normalizedFileName;
-  });
+  for (const fileName of names) {
+    const normalizedFileName = fileName.toLowerCase().trim();
+    
+    // Търсене на съвпадение по име на файл в сканираните локални файлове
+    const matchingKey = Object.keys(localImages).find((filePath) => {
+      const nameFromPath = filePath.split('/').pop() || '';
+      return nameFromPath.toLowerCase().trim() === normalizedFileName;
+    });
 
-  if (matchingKey) {
-    const fileModule = localImages[matchingKey];
-    // Във Vite статичните активи (картинки) се връщат или като стрингове (импорт тип url), или през default експорт
-    return typeof fileModule === 'string' ? fileModule : (fileModule?.default || fallbackUrl);
+    if (matchingKey) {
+      const fileModule = localImages[matchingKey];
+      // Във Vite статичните активи (картинки) се връщат или като стрингове (импорт тип url), или през default експорт
+      return typeof fileModule === 'string' ? fileModule : (fileModule?.default || fallbackUrl);
+    }
   }
 
   return fallbackUrl;
@@ -35,7 +40,7 @@ function getLocalOrFallback(fileName: string, fallbackUrl: string): string {
  */
 export const IMAGES = {
   hero_portrait: getLocalOrFallback(
-    "rosen-simeonov.JPG", 
+    ["rosen-simeonov.JPG", "rosen-simeonov-ruse.JPG"], 
     "https://rosensimeonov.com/assets/images/rosen-simeonov.JPG"
   ),
   hero_bg: getLocalOrFallback(
@@ -104,7 +109,18 @@ export const IMAGES = {
   ),
   about_mattison_manager: getLocalOrFallback(
     "rosen-simeonov-manager-mattison.jpg",
-    "https://rosensimeonov.com/rosen-simeonov-manager-mattison.jpg"
+    getLocalOrFallback(
+      "mattison-scaffolding-yard.jpg",
+      "https://rosensimeonov.com/rosen-simeonov-manager-mattison.jpg"
+    )
+  ),
+  about_mattison_yard: getLocalOrFallback(
+    "mattison-scaffolding-yard.jpg",
+    "https://rosensimeonov.com/assets/images/mattison-scaffolding-yard.jpg"
+  ),
+  about_graduation: getLocalOrFallback(
+    "rosen-simeonov-graduation.jpg",
+    "https://rosensimeonov.com/assets/images/rosen-simeonov-graduation.jpg"
   ),
   about_dsb: getLocalOrFallback(
     "Rosen Simeonov poema posta obshtinski predsedatel.jpg",

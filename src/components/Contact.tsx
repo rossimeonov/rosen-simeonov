@@ -53,13 +53,13 @@ export function Contact() {
             </p>
             
             <div className="space-y-10">
-               <a href="mailto:office@rosensimeonov.com" className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 group cursor-pointer text-left">
+               <a href="mailto:info@rosensimeonov.com" className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 group cursor-pointer text-left">
                   <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-brand-600 transition-all border border-white/10 group-hover:border-transparent shrink-0">
                      <Mail size={24} />
                   </div>
                   <div className="min-w-0">
                      <div className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-1">Имейл</div>
-                     <div className="text-lg sm:text-2xl font-bold hover:text-brand-600 transition-colors break-all text-white">office@rosensimeonov.com</div>
+                     <div className="text-lg sm:text-2xl font-bold hover:text-brand-600 transition-colors break-all text-white">info@rosensimeonov.com</div>
                   </div>
                </a>
                <div className="flex gap-6 pt-6">

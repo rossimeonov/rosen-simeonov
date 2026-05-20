@@ -96,8 +96,8 @@ export function Contact() {
                   </div>
                   <div className="min-w-0">
                     <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">Официална поща</span>
-                    <a href="mailto:office@rosensimeonov.com" className="text-base sm:text-lg font-bold text-slate-900 hover:text-brand-600 transition-colors break-all block">
-                      office@rosensimeonov.com
+                    <a href="mailto:info@rosensimeonov.com" className="text-base sm:text-lg font-bold text-slate-900 hover:text-brand-600 transition-colors break-all block">
+                      info@rosensimeonov.com
                     </a>
                   </div>
                 </div>
