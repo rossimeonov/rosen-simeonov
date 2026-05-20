@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { blogPosts } from '../data';
 import { useState, FormEvent } from 'react';
 import { Newsletter } from '../components/Newsletter';
+import { ProcurementChart } from '../components/ProcurementChart';
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -106,9 +107,30 @@ export function BlogPost() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 py-24">
         {/* Main Article Content */}
         <div className="lg:col-span-8">
-          <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
-          </article>
+          {post.slug === 'miliohinite-na-ruse-obshtestveni-poruchki' ? (
+            (() => {
+              const parts = post.content.split('---');
+              return (
+                <>
+                  <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
+                    <ReactMarkdown>{parts[0]}</ReactMarkdown>
+                  </article>
+                  
+                  <ProcurementChart />
+                  
+                  <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
+                    <ReactMarkdown>{parts[1]}</ReactMarkdown>
+                    <hr className="my-10 border-slate-150" />
+                    <ReactMarkdown>{parts[2]}</ReactMarkdown>
+                  </article>
+                </>
+              );
+            })()
+          ) : (
+            <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </article>
+          )}
           
           {/* Social Sharing */}
           <div className="mt-20 pt-10 border-t border-slate-100 flex flex-wrap items-center justify-between gap-8">

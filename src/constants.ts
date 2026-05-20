@@ -50,6 +50,7 @@ export const IMAGES = {
   blog_finance: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
   blog_city: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
   blog_logistics: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  blog_procurement: "https://rossimeonov.github.io/rosen-old-/images/obshtetsveni-poruchki-ruse.jpg",
 
   // Биография / За мен
   about_main: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-ruse.JPG",
