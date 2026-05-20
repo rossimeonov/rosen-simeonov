@@ -51,6 +51,8 @@ export const IMAGES = {
   blog_city: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
   blog_logistics: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
   blog_procurement: "https://rossimeonov.github.io/rosen-old-/images/obshtetsveni-poruchki-ruse.jpg",
+  blog_georgiovden: "https://rossimeonov.github.io/rosen-old-/images/rosen%20simeonov%20ivan%20belchev%20nadejda%20iordanova%20deyan%20gerasimov.jpg",
+  blog_georgiovden_secondary: "https://rossimeonov.github.io/rosen-old-/images/rosen%20simeonov-ivan%20belchev.jpg",
 
   // Биография / За мен
   about_main: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-ruse.JPG",
