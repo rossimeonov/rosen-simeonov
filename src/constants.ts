@@ -39,28 +39,28 @@ function getLocalOrFallback(fileNames: string | string[], fallbackUrl: string): 
  * ще го засече и ще го използва вместо отдалечения адрес.
  */
 export const IMAGES = {
-  hero_portrait: "/images/rosen-simeonov-ruse.JPG",
-  hero_bg: "/images/ruse.jpg",
-  about_portrait: "/images/rosen-simeonov-ruse.JPG",
-  contact_bg: "/images/ruse.jpg",
-  media_placeholder: "/images/ruse.jpg",
+  hero_portrait: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-ruse.JPG",
+  hero_bg: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  about_portrait: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-ruse.JPG",
+  contact_bg: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  media_placeholder: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
   
   // Категории в блога
-  blog_investments: "/images/ruse.jpg",
-  blog_finance: "/images/ruse.jpg",
-  blog_city: "/images/ruse.jpg",
-  blog_logistics: "/images/ruse.jpg",
+  blog_investments: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  blog_finance: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  blog_city: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
+  blog_logistics: "https://rossimeonov.github.io/rosen-old-/images/ruse.jpg",
 
   // Биография / За мен
-  about_main: "/images/rosen-simeonov-ruse.JPG",
-  about_achiever: "/images/top achiever rosen simeonov.png",
-  about_academy: "/images/rosen simeonov radan kanve atanas burov akademia.jpg",
-  about_family: "/images/rosen simeonov semeistvo.jpg",
-  about_kickbox: "/images/rosen simeonov black belt kick box.jpg",
-  about_conference: "/images/finansova-konferncia-invest-pro-rosen-simeonov.jpg",
-  about_mattison_logo: "/images/mattison-scaffolding.jpg",
-  about_mattison_manager: "/images/rosen-simeonov-manager-mattison.jpg",
-  about_mattison_yard: "/images/mattison-scaffolding-yard.jpg",
-  about_graduation: "/images/top achiever rosen simeonov.png",
-  about_dsb: "/images/Rosen Simeonov poema posta obshtinski predsedatel.jpg",
+  about_main: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-ruse.JPG",
+  about_achiever: "https://rossimeonov.github.io/rosen-old-/images/top%20achiever%20rosen%20simeonov.png",
+  about_academy: "https://rossimeonov.github.io/rosen-old-/images/rosen%20simeonov%20radan%20kanve%20atanas%20burov%20akademia.jpg",
+  about_family: "https://rossimeonov.github.io/rosen-old-/images/rosen%20simeonov%20semeistvo.jpg",
+  about_kickbox: "https://rossimeonov.github.io/rosen-old-/images/rosen%20simeonov%20black%20belt%20kick%20box.jpg",
+  about_conference: "https://rossimeonov.github.io/rosen-old-/images/finansova-konferncia-invest-pro-rosen-simeonov.jpg",
+  about_mattison_logo: "https://rossimeonov.github.io/rosen-old-/images/mattison-scaffolding.jpg",
+  about_mattison_manager: "https://rossimeonov.github.io/rosen-old-/images/rosen-simeonov-manager-mattison.jpg",
+  about_mattison_yard: "https://rossimeonov.github.io/rosen-old-/images/mattison-scaffolding-yard.jpg",
+  about_graduation: "https://rossimeonov.github.io/rosen-old-/images/top%20achiever%20rosen%20simeonov.png",
+  about_dsb: "https://rossimeonov.github.io/rosen-old-/images/Rosen%20Simeonov%20poema%20posta%20obshtinski%20predsedatel.jpg",
 };

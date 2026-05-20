@@ -62,7 +62,7 @@ export function Home() {
       
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center lg:pt-0 pt-24 overflow-hidden bg-brand-950">
-        <div className="absolute inset-0 z-0 bg-cover bg-center brightness-[0.3]" style={{ backgroundImage: `url(${IMAGES.hero_bg})` }} />
+        <div className="absolute inset-0 z-0 bg-cover bg-center brightness-[0.12] opacity-75" style={{ backgroundImage: `url(${IMAGES.hero_bg})` }} />
         
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center w-full relative z-10">
           <motion.div 
