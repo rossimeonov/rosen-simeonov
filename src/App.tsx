@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -23,7 +23,7 @@ import { CookieBanner } from './components/CookieBanner';
 export default function App() {
   return (
     <HelmetProvider>
-      <HashRouter>
+      <BrowserRouter>
         <ScrollToTop />
         <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-brand-600 selection:text-white overflow-x-hidden">
           <Header />
@@ -44,7 +44,7 @@ export default function App() {
           <Footer />
           <CookieBanner />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </HelmetProvider>
   );
 }
