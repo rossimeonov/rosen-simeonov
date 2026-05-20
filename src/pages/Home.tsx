@@ -200,7 +200,7 @@ export function Home() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-8">
+            <div className={blogPosts.length > 1 ? "lg:col-span-8" : "lg:col-span-12"}>
               <Link to={`/publications/${blogPosts[0].slug}`} className="group">
                 <div className="aspect-[16/9] overflow-hidden mb-10 relative">
                   <img src={blogPosts[0].image} alt="Featured" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale group-hover:grayscale-0" />
@@ -215,19 +215,21 @@ export function Home() {
               </Link>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100 border-t border-slate-100">
-              {blogPosts.slice(1, 4).map((post) => (
-                <Link key={post.id} to={`/publications/${post.slug}`} className="py-10 group first:pt-4">
-                  <div className="flex gap-4 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-600">
-                    <span>{post.category}</span>
-                    <span className="text-slate-400">{post.date}</span>
-                  </div>
-                  <h4 className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors leading-tight">
-                    {post.title}
-                  </h4>
-                </Link>
-              ))}
-            </div>
+            {blogPosts.length > 1 && (
+              <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100 border-t border-slate-100">
+                {blogPosts.slice(1, 4).map((post) => (
+                  <Link key={post.id} to={`/publications/${post.slug}`} className="py-10 group first:pt-4">
+                    <div className="flex gap-4 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-600">
+                      <span>{post.category}</span>
+                      <span className="text-slate-400">{post.date}</span>
+                    </div>
+                    <h4 className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors leading-tight">
+                      {post.title}
+                    </h4>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

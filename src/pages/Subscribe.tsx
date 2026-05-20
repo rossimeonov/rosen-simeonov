@@ -86,8 +86,8 @@ export function Subscribe() {
                       className="space-y-8 relative z-10"
                     >
                       <div>
-                        <h3 className="text-2xl font-syne font-extrabold text-slate-950 tracking-tight mb-2">Абонирайте се за анализи</h3>
-                        <p className="text-slate-400 font-light text-sm leading-relaxed">Въведете имейл адреса си, за да получавате новите публикации директно.</p>
+                        <h3 className="text-2xl font-syne font-extrabold text-slate-950 tracking-tight mb-2">Бюлетин за Русе</h3>
+                        <p className="text-slate-400 font-light text-sm leading-relaxed">Получавайте нови анализи и идеи за икономическото развитие на Русе директно във Вашата поща, само когато има наистина важно съдържание.</p>
                       </div>
 
                       <div className="space-y-4">
@@ -99,6 +99,7 @@ export function Subscribe() {
                               type="email" 
                               placeholder="Вашият имейл адрес" 
                               className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-5 outline-none focus:border-brand-600 focus:bg-white focus:ring-1 focus:ring-brand-600/20 transition-all font-medium text-slate-950 placeholder:text-slate-400 text-sm" 
+                              name="email"
                             />
                           </div>
                         </div>
@@ -110,8 +111,8 @@ export function Subscribe() {
                             id="gdpr-sub" 
                             className="mt-1.5 h-4 w-4 shrink-0 rounded border-slate-200 text-brand-600 ring-offset-white focus:ring-brand-500 cursor-pointer" 
                           />
-                          <label htmlFor="gdpr-sub" className="text-[10px] text-slate-400 leading-tight cursor-pointer">
-                            Съгласен съм предоставените от мен лични данни да бъдат обработвани за изпращане на нови анализи и публикации съгласно Политиката за поверителност.
+                          <label htmlFor="gdpr-sub" className="text-[10px] text-slate-400 leading-tight cursor-pointer selection:bg-transparent">
+                            Съгласен съм предоставените от мен лични данни да бъдат обработвани за целите на изпращане на бюлетин съгласно Политиката за поверителност.
                           </label>
                         </div>
                       </div>
@@ -120,7 +121,7 @@ export function Subscribe() {
                         type="submit" 
                         className="w-full py-6 bg-brand-950 text-white font-black text-xs uppercase tracking-[0.4em] hover:bg-brand-600 transition-all duration-300 rounded-2xl shadow-xl flex items-center justify-center gap-3 group"
                       >
-                        <span>Абонирай Ме</span>
+                        <span>Абонирайте се сега</span>
                         <Send size={14} className="group-hover:translate-x-1 transition-transform" />
                       </button>
 

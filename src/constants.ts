@@ -39,91 +39,28 @@ function getLocalOrFallback(fileNames: string | string[], fallbackUrl: string): 
  * ще го засече и ще го използва вместо отдалечения адрес.
  */
 export const IMAGES = {
-  hero_portrait: getLocalOrFallback(
-    ["rosen-simeonov.JPG", "rosen-simeonov-ruse.JPG"], 
-    "https://rosensimeonov.com/assets/images/rosen-simeonov.JPG"
-  ),
-  hero_bg: getLocalOrFallback(
-    "hero_bg.jpg",
-    "https://images.unsplash.com/photo-1605146761889-ee401df340ee?auto=format&fit=crop&q=80&w=2000"
-  ),
-  about_portrait: getLocalOrFallback(
-    "about_portrait.jpg",
-    "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1200"
-  ),
-  contact_bg: getLocalOrFallback(
-    "contact_bg.jpg",
-    "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000"
-  ),
-  media_placeholder: getLocalOrFallback(
-    "media_placeholder.jpg",
-    "https://images.unsplash.com/photo-1478720143022-10d08220952d?auto=format&fit=crop&q=80&w=2000"
-  ),
+  hero_portrait: "/images/rosen-simeonov-ruse.JPG",
+  hero_bg: "/images/ruse.jpg",
+  about_portrait: "/images/rosen-simeonov-ruse.JPG",
+  contact_bg: "/images/ruse.jpg",
+  media_placeholder: "/images/ruse.jpg",
   
   // Категории в блога
-  blog_investments: getLocalOrFallback(
-    "blog_investments.jpg",
-    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800"
-  ),
-  blog_finance: getLocalOrFallback(
-    "blog_finance.jpg",
-    "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800"
-  ),
-  blog_city: getLocalOrFallback(
-    "blog_city.jpg",
-    "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=800"
-  ),
-  blog_logistics: getLocalOrFallback(
-    "blog_logistics.jpg",
-    "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
-  ),
+  blog_investments: "/images/ruse.jpg",
+  blog_finance: "/images/ruse.jpg",
+  blog_city: "/images/ruse.jpg",
+  blog_logistics: "/images/ruse.jpg",
 
   // Биография / За мен
-  about_main: getLocalOrFallback(
-    "rosen-simeonov-ruse.JPG",
-    "https://rosensimeonov.com/rosen-simeonov-ruse.JPG"
-  ),
-  about_achiever: getLocalOrFallback(
-    "top achiever rosen simeonov.png",
-    "https://rosensimeonov.com/top%20achiever%20rosen%20simeonov.png"
-  ),
-  about_academy: getLocalOrFallback(
-    "rosen simeonov radan kanve atanas burov akademia.jpg",
-    "https://rosensimeonov.com/rosen%20simeonov%20radan%20kanve%20atanas%20burov%20akademia.jpg"
-  ),
-  about_family: getLocalOrFallback(
-    "rosen simeonov semeistvo.jpg",
-    "https://rosensimeonov.com/rosen%20simeonov%20semeistvo.jpg"
-  ),
-  about_kickbox: getLocalOrFallback(
-    "rosen simeonov black belt kick box.jpg",
-    "https://rosensimeonov.com/rosen%20simeonov%20black%20belt%20kick%20box.jpg"
-  ),
-  about_conference: getLocalOrFallback(
-    "finansova-konferncia-invest-pro-rosen-simeonov.jpg",
-    "https://rosensimeonov.com/finansova-konferncia-invest-pro-rosen-simeonov.jpg"
-  ),
-  about_mattison_logo: getLocalOrFallback(
-    "mattison-scaffolding.jpg",
-    "https://rosensimeonov.com/mattison-scaffolding.jpg"
-  ),
-  about_mattison_manager: getLocalOrFallback(
-    "rosen-simeonov-manager-mattison.jpg",
-    getLocalOrFallback(
-      "mattison-scaffolding-yard.jpg",
-      "https://rosensimeonov.com/rosen-simeonov-manager-mattison.jpg"
-    )
-  ),
-  about_mattison_yard: getLocalOrFallback(
-    "mattison-scaffolding-yard.jpg",
-    "https://rosensimeonov.com/assets/images/mattison-scaffolding-yard.jpg"
-  ),
-  about_graduation: getLocalOrFallback(
-    "rosen-simeonov-graduation.jpg",
-    "https://rosensimeonov.com/assets/images/rosen-simeonov-graduation.jpg"
-  ),
-  about_dsb: getLocalOrFallback(
-    "Rosen Simeonov poema posta obshtinski predsedatel.jpg",
-    "https://rosensimeonov.com/Rosen%20Simeonov%20poema%20posta%20obshtinski%20predsedatel.jpg"
-  ),
+  about_main: "/images/rosen-simeonov-ruse.JPG",
+  about_achiever: "/images/top achiever rosen simeonov.png",
+  about_academy: "/images/rosen simeonov radan kanve atanas burov akademia.jpg",
+  about_family: "/images/rosen simeonov semeistvo.jpg",
+  about_kickbox: "/images/rosen simeonov black belt kick box.jpg",
+  about_conference: "/images/finansova-konferncia-invest-pro-rosen-simeonov.jpg",
+  about_mattison_logo: "/images/mattison-scaffolding.jpg",
+  about_mattison_manager: "/images/rosen-simeonov-manager-mattison.jpg",
+  about_mattison_yard: "/images/mattison-scaffolding-yard.jpg",
+  about_graduation: "/images/top achiever rosen simeonov.png",
+  about_dsb: "/images/Rosen Simeonov poema posta obshtinski predsedatel.jpg",
 };

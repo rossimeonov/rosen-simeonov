@@ -194,51 +194,55 @@ export function BlogPost() {
           <Newsletter variant="brand" sidebar={true} />
 
           {/* Related Articles */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 mb-8 border-b border-slate-100 pb-4">Още публикации</h4>
-            <div className="space-y-10">
+          {blogPosts.filter(p => p.id !== post.id).length > 0 && (
+            <div>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 mb-8 border-b border-slate-100 pb-4">Още публикации</h4>
+              <div className="space-y-10">
+                {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
+                  <Link key={other.id} to={`/publications/${other.slug}`} className="flex gap-4 group">
+                    <div className="w-20 h-20 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden bg-slate-100">
+                      <img src={other.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    </div>
+                    <div>
+                      <span className="text-[9px] font-black uppercase tracking-widest text-brand-600 mb-1 block">{other.category}</span>
+                      <h5 className="font-bold leading-tight group-hover:text-brand-600 transition-colors line-clamp-2 italic tracking-tight text-slate-900">{other.title}</h5>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </aside>
+      </div>
+
+      {/* Suggested Posts Section */}
+      {blogPosts.filter(p => p.id !== post.id).length > 0 && (
+        <section className="py-32 bg-slate-50 border-t border-slate-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-syne font-black italic mb-16 border-l-4 border-brand-600 pl-8">Препоръчано за Вас</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
               {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
-                <Link key={other.id} to={`/publications/${other.slug}`} className="flex gap-4 group">
-                  <div className="w-20 h-20 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden bg-slate-100">
-                    <img src={other.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
+                  <div className="aspect-[16/9] overflow-hidden mb-6 relative">
+                    <img 
+                      src={other.image} 
+                      alt={other.title} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
+                    />
+                    <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  <div>
-                    <span className="text-[9px] font-black uppercase tracking-widest text-brand-600 mb-1 block">{other.category}</span>
-                    <h5 className="font-bold leading-tight group-hover:text-brand-600 transition-colors line-clamp-2 italic tracking-tight text-slate-900">{other.title}</h5>
+                  <h3 className="text-xl font-bold group-hover:text-brand-600 transition-colors leading-tight mb-4 tracking-tight text-slate-900">
+                    {other.title}
+                  </h3>
+                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-brand-600 transition-colors">
+                     Прочетете повече <ArrowRight size={14} />
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-        </aside>
-      </div>
-
-      {/* Suggested Posts Section */}
-      <section className="py-32 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-syne font-black italic mb-16 border-l-4 border-brand-600 pl-8">Препоръчано за Вас</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
-              <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
-                <div className="aspect-[16/9] overflow-hidden mb-6 relative">
-                  <img 
-                    src={other.image} 
-                    alt={other.title} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
-                  />
-                  <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <h3 className="text-xl font-bold group-hover:text-brand-600 transition-colors leading-tight mb-4 tracking-tight text-slate-900">
-                  {other.title}
-                </h3>
-                <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-brand-600 transition-colors">
-                   Прочетете повече <ArrowRight size={14} />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
