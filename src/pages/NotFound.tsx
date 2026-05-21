@@ -2,12 +2,24 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { IMAGES } from '../constants';
 
 export function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white p-6">
       <Helmet>
         <title>404 - Страницата не е намерена | Росен Симеонов</title>
+        <meta name="description" content="Търсената от Вас страница не съществува или е преместена. Върнете се към началната страница." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="404 - Страницата не е намерена | Росен Симеонов" />
+        <meta property="og:description" content="Търсената от Вас страница не съществува или е преместена. Върнете се към началната страница." />
+        <meta property="og:image" content={IMAGES.hero_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="404 - Страницата не е намерена | Росен Симеонов" />
+        <meta name="twitter:description" content="Търсената от Вас страница не съществува или е преместена. Върнете се към началната страница." />
+        <meta name="twitter:image" content={IMAGES.hero_bg} />
       </Helmet>
       
       <div className="max-w-xl w-full text-center space-y-12">

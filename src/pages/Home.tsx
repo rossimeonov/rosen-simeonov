@@ -56,6 +56,16 @@ export function Home() {
       <Helmet>
         <title>Росен Симеонов | Опит, дисциплина и ясна визия за Русе</title>
         <meta name="description" content="Росен Симеонов - икономист, финансист и предприемач. Открийте моята визия за икономическото развитие и бъдещето на град Русе." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Росен Симеонов | Опит, дисциплина и ясна визия за Русе" />
+        <meta property="og:description" content="Росен Симеонов - икономист, финансист и предприемач. Открийте моята визия за икономическото развитие и бъдещето на град Русе." />
+        <meta property="og:image" content={IMAGES.hero_portrait} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Росен Симеонов | Опит, дисциплина и ясна визия за Русе" />
+        <meta name="twitter:description" content="Росен Симеонов - икономист, финансист и предприемач. Открийте моята визия за икономическото развитие и бъдещето на град Русе." />
+        <meta name="twitter:image" content={IMAGES.hero_portrait} />
       </Helmet>
 
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-brand-600 origin-[0%] z-[60]" style={{ scaleX }} />

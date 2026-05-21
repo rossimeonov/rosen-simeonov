@@ -3,10 +3,25 @@ import { PlayCircle, ExternalLink } from 'lucide-react';
 import { mediaAppearances } from '../data';
 import { IMAGES } from '../constants';
 import { Newsletter } from '../components/Newsletter';
+import { Helmet } from 'react-helmet-async';
 
 export function Media() {
   return (
     <div className="pt-32 bg-white">
+      <Helmet>
+        <title>Медийни участия | Росен Симеонов</title>
+        <meta name="description" content="Архив с публични участия, телевизионни интервюта и статии на Росен Симеонов в медиите." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Медийни участия | Росен Симеонов" />
+        <meta property="og:description" content="Архив с публични участия, телевизионни интервюта и статии на Росен Симеонов в медиите." />
+        <meta property="og:image" content={IMAGES.media_placeholder} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Медийни участия | Росен Симеонов" />
+        <meta name="twitter:description" content="Архив с публични участия, телевизионни интервюта и статии на Росен Симеонов в медиите." />
+        <meta name="twitter:image" content={IMAGES.media_placeholder} />
+      </Helmet>
       {/* Header */}
       <section className="py-24 bg-brand-950 text-white">
         <div className="max-w-7xl mx-auto px-6">

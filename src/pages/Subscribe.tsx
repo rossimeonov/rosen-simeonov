@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Mail, Send, ArrowRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { IMAGES } from '../constants';
 
 export function Subscribe() {
   const [status, setStatus] = useState<'idle' | 'success'>('idle');
@@ -17,6 +18,16 @@ export function Subscribe() {
       <Helmet>
         <title>Абонамент за Бюлетина | Росен Симеонов</title>
         <meta name="description" content="Абонирайте се за периодичния бюлетин и анализи за икономическото развитие на Русе директно във Вашата поща." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Абонамент за Бюлетина | Росен Симеонов" />
+        <meta property="og:description" content="Абонирайте се за периодичния бюлетин и анализи за икономическото развитие на Русе директно във Вашата поща." />
+        <meta property="og:image" content={IMAGES.hero_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Абонамент за Бюлетина | Росен Симеонов" />
+        <meta name="twitter:description" content="Абонирайте се за периодичния бюлетин и анализи за икономическото развитие на Русе директно във Вашата поща." />
+        <meta name="twitter:image" content={IMAGES.hero_bg} />
       </Helmet>
 
       <div className="pt-32 bg-slate-50 min-h-screen flex flex-col justify-between selection:bg-brand-600 selection:text-white">

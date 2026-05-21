@@ -11,6 +11,16 @@ export function About() {
       <Helmet>
         <title>За мен | Опит, принципи и визия за Русе | Росен Симеонов</title>
         <meta name="description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="За мен | Опит, принципи и визия за Русе | Росен Симеонов" />
+        <meta property="og:description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
+        <meta property="og:image" content={IMAGES.about_main} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="За мен | Опит, принципи и визия за Русе | Росен Симеонов" />
+        <meta name="twitter:description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
+        <meta name="twitter:image" content={IMAGES.about_main} />
       </Helmet>
 
       {/* Hero Section */}

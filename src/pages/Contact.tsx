@@ -47,6 +47,16 @@ export function Contact() {
       <Helmet>
         <title>Контакт | Росен Симеонов</title>
         <meta name="description" content="Свържете се с Росен Симеонов. Изпратете своите въпроси, идеи или предложения за икономическото развитие и развитието на Русе." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Контакт | Росен Симеонов" />
+        <meta property="og:description" content="Свържете се с Росен Симеонов. Изпратете своите въпроси, идеи или предложения за икономическото развитие и развитието на Русе." />
+        <meta property="og:image" content={IMAGES.contact_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Контакт | Росен Симеонов" />
+        <meta name="twitter:description" content="Свържете се с Росен Симеонов. Изпратете своите въпроси, идеи или предложения за икономическото развитие и развитието на Русе." />
+        <meta name="twitter:image" content={IMAGES.contact_bg} />
       </Helmet>
 
       <div className="pt-32 bg-slate-50 min-h-screen selection:bg-brand-600 selection:text-white">

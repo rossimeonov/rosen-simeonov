@@ -1,11 +1,23 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
+import { IMAGES } from '../constants';
 
 export function Privacy() {
   return (
     <div className="pt-32 pb-32 bg-white selection:bg-brand-600 selection:text-white">
       <Helmet>
         <title>Политика за поверителност | Росен Симеонов</title>
+        <meta name="description" content="Декларация за поверителност и защита на личните данни. Информация за начина, по който обработваме личните Ви данни." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Политика за поверителност | Росен Симеонов" />
+        <meta property="og:description" content="Декларация за поверителност и защита на личните данни. Информация за начина, по който обработваме личните Ви данни." />
+        <meta property="og:image" content={IMAGES.hero_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Политика за поверителност | Росен Симеонов" />
+        <meta name="twitter:description" content="Декларация за поверителност и защита на личните данни. Информация за начина, по който обработваме личните Ви данни." />
+        <meta name="twitter:image" content={IMAGES.hero_bg} />
       </Helmet>
 
       <section className="max-w-4xl mx-auto px-6">

@@ -1,11 +1,23 @@
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
+import { IMAGES } from '../constants';
 
 export function Cookies() {
   return (
     <div className="pt-32 pb-32 bg-white selection:bg-brand-600 selection:text-white">
       <Helmet>
         <title>Политика за бисквитки | Росен Симеонов</title>
+        <meta name="description" content="Информация за това как и защо използваме „бисквитки“ на нашия уебсайт за Вашето по-добро потребителско изживяване." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Политика за бисквитки | Росен Симеонов" />
+        <meta property="og:description" content="Информация за това как и защо използваме „бисквитки“ на нашия уебсайт за Вашето по-добро потребителско изживяване." />
+        <meta property="og:image" content={IMAGES.hero_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Политика за бисквитки | Росен Симеонов" />
+        <meta name="twitter:description" content="Информация за това как и защо използваме „бисквитки“ на нашия уебсайт за Вашето по-добро потребителско изживяване." />
+        <meta name="twitter:image" content={IMAGES.hero_bg} />
       </Helmet>
 
       <section className="max-w-4xl mx-auto px-6">

@@ -52,6 +52,11 @@ export function BlogPost() {
         <meta property="og:description" content={post.seo.description || post.excerpt} />
         <meta property="og:image" content={post.image} />
         <meta property="og:type" content="article" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.seo.title || post.title} />
+        <meta name="twitter:description" content={post.seo.description || post.excerpt} />
+        <meta name="twitter:image" content={post.image} />
       </Helmet>
 
       {/* Reading Progress Bar */}

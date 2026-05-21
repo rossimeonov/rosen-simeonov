@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { blogPosts } from '../data';
 import { Newsletter } from '../components/Newsletter';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { IMAGES } from '../constants';
 
 export function Publications() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,6 +22,16 @@ export function Publications() {
       <Helmet>
         <title>Блог и Публикации | Росен Симеонов</title>
         <meta name="description" content="Позиции, анализи и идеи за икономическото развитие и бъдещето на град Русе." />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Блог и Публикации | Росен Симеонов" />
+        <meta property="og:description" content="Позиции, анализи и идеи за икономическото развитие и бъдещето на град Русе." />
+        <meta property="og:image" content={IMAGES.hero_bg} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Блог и Публикации | Росен Симеонов" />
+        <meta name="twitter:description" content="Позиции, анализи и идеи за икономическото развитие и бъдещето на град Русе." />
+        <meta name="twitter:image" content={IMAGES.hero_bg} />
       </Helmet>
 
       {/* Header */}
