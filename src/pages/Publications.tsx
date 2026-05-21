@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { blogPosts } from '../data';
 import { Newsletter } from '../components/Newsletter';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export function Publications() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -68,11 +69,11 @@ export function Publications() {
        <section className="py-24 border-b border-slate-100 bg-slate-50/50">
         <div className="max-w-7xl mx-auto px-6">
            <Link to={`/publications/${filteredPosts[0].slug}`} className="grid lg:grid-cols-2 gap-16 items-center group">
-              <div className="aspect-[16/10] overflow-hidden bg-slate-200">
-                 <img 
+              <div className="aspect-[16/10]">
+                 <OptimizedImage 
                    src={filteredPosts[0].image} 
                    alt={filteredPosts[0].title} 
-                   className="h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                   className="h-full w-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
                  />
               </div>
               <div className="space-y-6">
@@ -114,13 +115,13 @@ export function Publications() {
                     viewport={{ once: true }}
                   >
                     <Link to={`/publications/${post.slug}`} className="group block h-full">
-                      <div className="aspect-[4/3] overflow-hidden mb-8 relative">
-                          <img 
+                      <div className="aspect-[4/3] mb-8 relative">
+                          <OptimizedImage 
                             src={post.image} 
                             alt={post.title} 
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                            className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
                           />
-                          <div className="absolute inset-0 bg-brand-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute inset-0 bg-brand-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       </div>
                       <div className="flex gap-3 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-600">
                           <span>{post.category}</span>

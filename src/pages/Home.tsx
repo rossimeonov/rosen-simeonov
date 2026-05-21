@@ -55,7 +55,7 @@ export function Home() {
     <>
       <Helmet>
         <title>Росен Симеонов | Опит, дисциплина и ясна визия за Русе</title>
-        <meta name="description" content="Росен Симеонов - икономист, финансист и предприемач. Открийте неговата визия за икономическото развитие и бъдещето на град Русе." />
+        <meta name="description" content="Росен Симеонов - икономист, финансист и предприемач. Открийте моята визия за икономическото развитие и бъдещето на град Русе." />
       </Helmet>
 
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-brand-600 origin-[0%] z-[60]" style={{ scaleX }} />
@@ -118,7 +118,7 @@ export function Home() {
                <span className="section-label">Накратко</span>
                <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950 mb-12 leading-tight">Професионализъм и <span className="text-brand-600">отдаденост</span> към Русе.</h2>
                <p className="text-xl text-slate-500 leading-relaxed font-light mb-12">
-                 След близо 20 години работа в Обединеното кралство, той се завърна в родния си град, за да приложи наученото в полза на русенското общество. Той вярва в реалните инвестиции, финансовата грамотност и прозрачното управление.
+                 След близо 20 години работа в Обединеното кралство, се завърнах в родния си град, за да приложа наученото в полза на русенското общество. Вярвам в реалните инвестиции, финансовата грамотност и прозрачното управление.
                </p>
                <Link to="/about" className="text-xs font-black uppercase tracking-widest text-brand-600 border-b border-brand-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-all">
                   Пълна Биография
@@ -128,10 +128,10 @@ export function Home() {
             <div className="lg:col-span-7">
               <div className="grid sm:grid-cols-2 gap-8">
                 {[
-                  { icon: Globe, title: "Глобален опит", desc: "Над 20 години в международни финансови среди." },
-                  { icon: TrendingUp, title: "Финансова култура", desc: "Радетел за грамотност като основа на свободата." },
-                  { icon: MapPin, title: "Русенски корен", desc: "Завърнал се със съзнателен избор за развитие." },
-                  { icon: Plus, title: "Визия 2030", desc: "Работа за прозрачност и модерна инфраструктура." }
+                  { icon: Globe, title: "Глобален опит", desc: "Над 20 години работа в международни финансови среди." },
+                  { icon: TrendingUp, title: "Финансова култура", desc: "Вярвам, че финансовата грамотност е основа на личната ни свобода." },
+                  { icon: MapPin, title: "Русенски корен", desc: "Завърнах се със съзнателен избор за бъдещето на нашия град." },
+                  { icon: Plus, title: "Визия 2030", desc: "Работя за пълна прозрачност и модерна общинска инфраструктура." }
                 ].map((item, i) => (
                   <div key={i} className="p-6 sm:p-10 bg-slate-50 flex flex-col justify-between hover:bg-brand-600 hover:text-white transition-all duration-500 group">
                     <item.icon size={24} className="mb-12" />

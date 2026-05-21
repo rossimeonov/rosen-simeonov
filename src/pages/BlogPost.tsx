@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import { blogPosts } from '../data';
 import { useState, FormEvent } from 'react';
 import { Newsletter } from '../components/Newsletter';
-import { ProcurementChart } from '../components/ProcurementChart';
+import { OptimizedImage } from '../components/OptimizedImage';
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -65,6 +65,8 @@ export function BlogPost() {
         <img 
           src={post.image} 
           alt={post.title} 
+          fetchPriority="high"
+          decoding="sync"
           className="w-full h-full object-cover grayscale brightness-50"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
@@ -107,30 +109,21 @@ export function BlogPost() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 py-24">
         {/* Main Article Content */}
         <div className="lg:col-span-8">
-          {post.slug === 'miliohinite-na-ruse-obshtestveni-poruchki' ? (
-            (() => {
-              const parts = post.content.split('---');
-              return (
-                <>
-                  <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
-                    <ReactMarkdown>{parts[0]}</ReactMarkdown>
-                  </article>
-                  
-                  <ProcurementChart />
-                  
-                  <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
-                    <ReactMarkdown>{parts[1]}</ReactMarkdown>
-                    <hr className="my-10 border-slate-150" />
-                    <ReactMarkdown>{parts[2]}</ReactMarkdown>
-                  </article>
-                </>
-              );
-            })()
-          ) : (
-            <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
-              <ReactMarkdown>{post.content}</ReactMarkdown>
-            </article>
-          )}
+          <article className="markdown-body prose prose-slate prose-lg max-w-none prose-headings:font-syne prose-headings:font-black prose-headings:italic prose-headings:tracking-tight prose-a:text-brand-600">
+            <ReactMarkdown
+              components={{
+                img: ({ node, ...props }) => (
+                  <OptimizedImage
+                    src={props.src || ''}
+                    alt={props.alt || ''}
+                    className="w-full h-auto rounded-2xl my-10 max-h-[550px]"
+                  />
+                )
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
+          </article>
           
           {/* Social Sharing */}
           <div className="mt-20 pt-10 border-t border-slate-100 flex flex-wrap items-center justify-between gap-8">
@@ -222,9 +215,11 @@ export function BlogPost() {
               <div className="space-y-10">
                 {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                   <Link key={other.id} to={`/publications/${other.slug}`} className="flex gap-4 group">
-                    <div className="w-20 h-20 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden bg-slate-100">
-                      <img src={other.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    </div>
+                    <OptimizedImage
+                      src={other.image}
+                      alt={other.title}
+                      className="w-20 h-20 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-widest text-brand-600 mb-1 block">{other.category}</span>
                       <h5 className="font-bold leading-tight group-hover:text-brand-600 transition-colors line-clamp-2 italic tracking-tight text-slate-900">{other.title}</h5>
@@ -245,13 +240,13 @@ export function BlogPost() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
               {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                 <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
-                  <div className="aspect-[16/9] overflow-hidden mb-6 relative">
-                    <img 
+                  <div className="aspect-[16/9] mb-6 relative">
+                    <OptimizedImage 
                       src={other.image} 
                       alt={other.title} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
+                      className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
                     />
-                    <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
                   <h3 className="text-xl font-bold group-hover:text-brand-600 transition-colors leading-tight mb-4 tracking-tight text-slate-900">
                     {other.title}
