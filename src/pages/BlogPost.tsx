@@ -3,16 +3,18 @@ import { motion, useScroll, useSpring } from 'motion/react';
 import { ArrowLeft, Clock, Tag, Calendar, Share2, Facebook, Linkedin, Twitter, MessageSquare, Send, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Helmet } from 'react-helmet-async';
-import { blogPosts } from '../data';
+import { getAllPosts } from '../blogUtils';
 import { useState, FormEvent } from 'react';
 import { Newsletter } from '../components/Newsletter';
 import { OptimizedImage } from '../components/OptimizedImage';
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find(p => p.slug === slug);
+  const allPosts = getAllPosts();
+  const post = allPosts.find(p => p.slug === slug);
   const location = useLocation();
-  const currentUrl = encodeURIComponent(window.location.origin + location.pathname);
+  const currentUrl = window.location.origin + location.pathname;
+  const encodedUrl = encodeURIComponent(currentUrl);
   
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -32,7 +34,7 @@ export function BlogPost() {
     );
   }
 
-  // Calculate reading time
+  // Изчисляване на време за четене
   const wordsPerMinute = 200;
   const wordCount = post.content.split(/\s+/g).length;
   const readingTime = Math.ceil(wordCount / wordsPerMinute);
@@ -43,20 +45,54 @@ export function BlogPost() {
     setTimeout(() => setCommentStatus('idle'), 5000);
   };
 
+  // ЛОКАЛНА GEO СХЕМА ЗА GOOGLE (Breadcrumbs за Русе)
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Начало",
+        "item": window.location.origin
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Публикации",
+        "item": `${window.location.origin}/publications`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": currentUrl
+      }
+    ]
+  };
+
   return (
     <div className="pt-32 bg-white min-h-screen">
+      {/* ИСТИНСКОТО SEO & GEO СЕ СЛУЧВА ТУК */}
       <Helmet>
-        <title>{post.seo.title || post.title}</title>
-        <meta name="description" content={post.seo.description || post.excerpt} />
-        <meta property="og:title" content={post.seo.title || post.title} />
-        <meta property="og:description" content={post.seo.description || post.excerpt} />
+        <title>{post.seoTitle || post.title}</title>
+        <meta name="description" content={post.seoDescription || post.excerpt} />
+        <meta property="og:title" content={post.seoTitle || post.title} />
+        <meta property="og:description" content={post.seoDescription || post.excerpt} />
         <meta property="og:image" content={post.image} />
+        <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
+        
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.seo.title || post.title} />
-        <meta name="twitter:description" content={post.seo.description || post.excerpt} />
+        <meta name="twitter:title" content={post.seoTitle || post.title} />
+        <meta name="twitter:description" content={post.seoDescription || post.excerpt} />
         <meta name="twitter:image" content={post.image} />
+
+        {/* Инжектиране на GEO структурирани данни */}
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
       </Helmet>
 
       {/* Reading Progress Bar */}
@@ -138,7 +174,7 @@ export function BlogPost() {
             </div>
             <div className="flex gap-4">
               <a 
-                href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 hover:bg-brand-600 hover:text-white transition-all rounded-full"
@@ -147,7 +183,7 @@ export function BlogPost() {
                 <Facebook size={18} />
               </a>
               <a 
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 hover:bg-brand-600 hover:text-white transition-all rounded-full"
@@ -156,7 +192,7 @@ export function BlogPost() {
                 <Linkedin size={18} />
               </a>
               <a 
-                href={`https://twitter.com/intent/tweet?url=${currentUrl}&text=${encodeURIComponent(post.title)}`}
+                href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodeURIComponent(post.title)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 hover:bg-brand-600 hover:text-white transition-all rounded-full"
@@ -181,7 +217,7 @@ export function BlogPost() {
                     <Send size={24} />
                   </div>
                   <h4 className="text-xl font-bold mb-2 tracking-tight">Благодаря за Вашия коментар!</h4>
-                  <p className="text-slate-500">Вашето мнение е изпратено за преглед от екипа ни.</p>
+                  <p className="text-slate-500">Вашето opinion е изпратено за преглед от екипа ни.</p>
                 </div>
               ) : (
                 <form onSubmit={handleComment} className="space-y-8">
@@ -210,15 +246,14 @@ export function BlogPost() {
 
         {/* Sidebar */}
         <aside className="lg:col-span-4 space-y-16">
-          {/* Newsletter Signup */}
           <Newsletter variant="brand" sidebar={true} />
 
           {/* Related Articles */}
-          {blogPosts.filter(p => p.id !== post.id).length > 0 && (
+          {allPosts.filter(p => p.id !== post.id).length > 0 && (
             <div>
               <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 mb-8 border-b border-slate-100 pb-4">Още публикации</h4>
               <div className="space-y-10">
-                {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
+                {allPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                   <Link key={other.id} to={`/publications/${other.slug}`} className="flex gap-4 group">
                     <OptimizedImage
                       src={other.image}
@@ -238,12 +273,12 @@ export function BlogPost() {
       </div>
 
       {/* Suggested Posts Section */}
-      {blogPosts.filter(p => p.id !== post.id).length > 0 && (
+      {allPosts.filter(p => p.id !== post.id).length > 0 && (
         <section className="py-32 bg-slate-50 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-syne font-black italic mb-16 border-l-4 border-brand-600 pl-8">Препоръчано за Вас</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {blogPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
+              {allPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                 <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
                   <div className="aspect-[16/9] mb-6 relative">
                     <OptimizedImage 

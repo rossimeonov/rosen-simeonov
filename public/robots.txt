@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Път към картата на сайта за Google
+Sitemap: https://rosensimeonov.com/sitemap.xml
