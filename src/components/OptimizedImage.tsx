@@ -1,48 +1,41 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
+  // Добавяме опция за контрол на напасването: 'cover' (запълване) или 'contain' (цялостно събиране)
+  fit?: 'cover' | 'contain';
 }
 
-export function OptimizedImage({ src, alt, className = '', ...props }: OptimizedImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [errorOccurred, setErrorOccurred] = useState(false);
+const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className = '', fit = 'cover' }) => {
+  const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
-    // Reset state when src changes
-    setIsLoaded(false);
-    setErrorOccurred(false);
-
-    const img = new Image();
-    img.src = src;
-    img.onload = () => setIsLoaded(true);
-    img.onerror = () => setErrorOccurred(true);
+    setCurrentSrc(src);
   }, [src]);
 
-  return (
-    <div className={`relative overflow-hidden bg-slate-100 ${className}`}>
-      {/* Shimmer / Skeleton Placeholder */}
-      {!isLoaded && !errorOccurred && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-50">
-          <div className="w-full h-full animate-pulse bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100" />
-        </div>
-      )}
+  const handleError = () => {
+    if (currentSrc !== '/images/ruse.webp') {
+      setCurrentSrc('/images/ruse.webp');
+    }
+  };
 
-      {/* Actual Image */}
+  return (
+    <div className={`overflow-hidden rounded-lg flex-shrink-0 w-full h-full ${className}`}>
       <img
-        src={src}
+        src={currentSrc}
         alt={alt}
-        loading="lazy"
-        decoding="async"
-        onLoad={() => setIsLoaded(true)}
-        onError={() => setErrorOccurred(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out ${
-          isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-sm'
-        }`}
-        {...props}
+        onError={handleError}
+        className="w-full h-full block"
+        style={{
+          // Използва динамично подадения стил (по подразбиране е 'cover')
+          objectFit: fit
+        }}
       />
     </div>
   );
-}
+};
+
+export { OptimizedImage };
+export default OptimizedImage;

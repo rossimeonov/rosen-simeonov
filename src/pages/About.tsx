@@ -1,351 +1,407 @@
-import { motion } from 'motion/react';
-import { Globe, TrendingUp, MapPin, Users, Scale, Lightbulb, GraduationCap, Building2, ShieldCheck, Heart } from 'lucide-react';
-import { IMAGES } from '../constants';
+﻿import { useState } from 'react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
+import { Globe, Plus, Award, CheckCircle2 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { Newsletter } from '../components/Newsletter';
 import { Link } from 'react-router-dom';
 
-export function About() {
+// Сигурни локални импорти (точно едно ниво нагоре от pages към src)
+import { IMAGES } from '../constants';
+import { Newsletter } from '../components/Newsletter';
+import { OptimizedImage } from '../components/OptimizedImage';
+
+// ДИРЕКТЕН ИМПОРТ НА ДИПЛОМИТЕ (Заобикаля евентуални грешки в constants.ts)
+import imgAchiever from '/images/top-achiever rosen-simeonov.webp';
+import imgGraduation from '/images/rosen-simeonov-graduation.jpg';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+function FAQAccordion({ item }: { item: FAQItem }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="pt-32 bg-white selection:bg-brand-600 selection:text-white">
+    <div className="border-b border-slate-100 overflow-hidden">
+      <button 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="w-full py-6 md:py-8 flex justify-between items-center text-left hover:text-brand-600 transition-colors group"
+      >
+        <span className="text-xl md:text-2xl font-bold tracking-tight italic">{item.question}</span>
+        <motion.div 
+          animate={{ rotate: isOpen ? 45 : 0 }} 
+          className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-600 group-hover:text-white transition-all shadow-sm"
+        >
+          <Plus size={20} />
+        </motion.div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }} 
+            animate={{ height: "auto", opacity: 1 }} 
+            exit={{ height: 0, opacity: 0 }} 
+            className="overflow-hidden"
+          >
+            <p className="pb-8 text-slate-500 text-lg font-light leading-relaxed">{item.answer}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+export function About() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  const quickFacts = [
+    'MBA от Anglia Ruskin University',
+    'Над 20 години международен управленски опит',
+    'Основател на AlphaInvest.bg',
+    'Финансова и икономическа експертиза',
+    'Обществен ангажимент към ДСБ Русе',
+  ];
+
+  const faqs = [
+    {
+      question: 'Кой е Росен Симеонов?',
+      answer: 'Росен Симеонов е финансов експерт, предприемач и обществено ангажиран човек от Русе с над 20 години международен професионален опит.',
+    },
+    {
+      question: 'Какъв е професионалният му опит?',
+      answer: 'Работил е в международна среда в Обединеното кралство, включително в сферата на логистиката, управлението и инвестициите.',
+    },
+    {
+      question: 'Какво е AlphaInvest.bg?',
+      answer: 'AlphaInvest.bg е платформа за финансова грамотност и инвестиционна култура, насочена към дългосрочно финансово мислене.',
+    },
+    {
+      question: 'Какво образование има?',
+      answer: 'Притежава MBA от Anglia Ruskin University и магистратура по финанси.',
+    },
+  ];
+
+  return (
+    <div className="bg-white text-slate-900 pt-28 selection:bg-brand-600 selection:text-white">
       <Helmet>
-        <title>За мен | Опит, принципи и визия за Русе | Росен Симеонов</title>
-        <meta name="description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="За мен | Опит, принципи и визия за Русе | Росен Симеонов" />
-        <meta property="og:description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
-        <meta property="og:image" content={IMAGES.about_main} />
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="За мен | Опит, принципи и визия за Русе | Росен Симеонов" />
-        <meta name="twitter:description" content="Научете повече за моя професионален път, образование и ценности – от международния опит в Лондон до завръщането в родния ми град Русе." />
-        <meta name="twitter:image" content={IMAGES.about_main} />
+        <title>За мен | Росен Симеонов — Опит, принципи и визия за Русе</title>
+        <meta name="description" content="Научете повече за моя професионален път, икономическа експертиза, образование и ценности – от международния опит в Лондон до каузата за Русе." />
+        <meta name="keywords" content="Росен Симеонов, Русе, ДСБ, AlphaInvest.bg, MBA, икономика, финансова грамотност, управление, инвестиции, местно развитие" />
       </Helmet>
 
-      {/* Hero Section */}
-      <section className="py-24 bg-slate-50 border-b border-slate-100 overflow-hidden text-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-4xl">
-            <motion.span 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="text-brand-600 font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-[10px] mb-8 block"
-            >
-              Кой съм аз
-            </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-3xl sm:text-5xl md:text-8xl font-syne font-black tracking-tighter leading-[0.9] italic text-slate-950 mb-12"
-            >
-              Опит, който работи за <span className="text-brand-600 underline decoration-2 underline-offset-8">Русе.</span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl"
-            >
-              Две десетилетия професионален опит в международна среда, предприемаческо мислене и решение за завръщане в родния ми град. Това е основата на пътя, по който вървя днес.
-            </motion.p>
+      {/* Прогрес бар за страницата */}
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-brand-600 origin-[0%] z-[60]" style={{ scaleX }} />
+
+      {/* HERO SECTION — ДИЗАЙНЕРСКИ И ИЗЦЯЛО СВЕТЪЛ ФОН */}
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-slate-50 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16 items-center w-full relative z-10 py-16">
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="lg:col-span-7 space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="h-px w-8 bg-brand-600" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600">За мен</span>
+            </div>
+            <h1 className="text-4xl md:text-7xl lg:text-8xl font-syne font-extrabold leading-[0.9] tracking-tighter text-slate-950 uppercase">
+              Опит по същество.<br />
+              <span className="text-brand-600">Визия за Русе.</span>
+            </h1>
+            <div className="grid sm:grid-cols-2 gap-4 pt-4">
+              {quickFacts.map((fact, index) => (
+                <div key={index} className="flex items-start gap-3 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+                  <CheckCircle2 className="text-brand-600 shrink-0 mt-0.5" size={20} />
+                  <span className="text-sm text-slate-700 font-medium leading-relaxed">{fact}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+          <div className="lg:col-span-5 relative w-full aspect-[4/5] overflow-hidden border border-slate-200 shadow-2xl rounded-[2rem] bg-white">
+            <OptimizedImage
+              src={IMAGES.about_main}
+              alt="Росен Симеонов"
+              className="h-full w-full object-cover grayscale opacity-95 hover:grayscale-0 transition-all duration-700"
+              fit="cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* Main Biography */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-5 relative group">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="aspect-[4/5] bg-slate-100 overflow-hidden rounded-2xl shadow-2xl"
-              >
-                <img 
-                  src={IMAGES.about_main} 
-                  alt="Росен Симеонов" 
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-1000"
-                />
-              </motion.div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-600 -z-10 rounded-2xl hidden xl:block" />
+      {/* BLOCK 1: ЗА ПОЛИТИКАТА */}
+      <section className="py-32 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="lg:col-span-7 space-y-6 text-lg text-slate-500 leading-relaxed font-light font-sans">
+            <p>
+              Ангажиментът ми към обществения живот и политическите процеси в България е напълно осъзнат и продиктуван от едно ясно убеждение: решенията за бъдещето на регионите трябва да се вземат с професионализъм, икономическа логика и безкомпромисна почтеност.
+            </p>
+            <p>
+              Към настоящия момент съм активно ангажиран с каузата на <strong>Демократи за силна България (ДСБ) в град Русе</strong>. За мен партийната дейност не е търсене на самоцелно присъствие в публичното пространство, а инструмент за изграждане на дясна, последователна и предвидима алтернатива за управление на местно и национално ниво.
+            </p>
+            <div className="p-6 sm:p-10 bg-slate-50 border-l-4 border-brand-600 text-slate-900 font-serif italic text-xl leading-relaxed my-8 shadow-sm">
+              „В основата на убежденията ми стои правото на човека да има свободата сам да избира как да протече животът му и единствено самият той да бъде отговорен за последиците от решенията, които взема. Безусловно споделям принципа, че там, където няма ясни правила, ред и законност — няма и истинска икономическа и гражданска свобода.“
             </div>
-
-            <div className="lg:col-span-7 space-y-10">
-              <div className="space-y-4">
-                <h2 className="text-3xl md:text-5xl font-syne font-bold italic tracking-tight text-slate-950">История за дисциплина и израстване</h2>
-                <p className="text-brand-600 font-black uppercase tracking-widest text-[10px]">Генерален мениджмънт & Стратегия</p>
-              </div>
-              <div className="prose prose-slate prose-lg max-w-none text-slate-600 font-light leading-relaxed font-sans">
-                <p>
-                  Роден в Русе през 1977 г., изграждам професионалния си път в продължение на близо две десетилетия в Обединеното кралство. Там преминах през различни нива на реалната икономика – от оперативна работа до управленски отговорности в логистиката и инвестициите.
-                </p>
-                <p>
-                  Този път ми даде не само ценен опит, но и ясен поглед към това как работят успешните системи – когато правилата са еднакви за всички, когато усилието има значение и когато има дългосрочно мислене.
-                </p>
-                <p>
-                  Завърших бакалавър по аграрна икономика и магистратура по финанси в Стопанска академия „Д. А. Ценов“ – Свищов, а по-късно придобих и MBA от Anglia Ruskin University. Съчетавам академичната подготовка с реален практически опит – комбинация, която ми помага да виждам както голямата картина, така и конкретните решения.
-                </p>
-                <div className="bg-slate-50 p-6 md:p-8 border-l-4 border-brand-600 italic font-medium text-slate-900 leading-relaxed">
-                  През 2022 г. се завърнах в родния си град със семейството ми. Решението ми не бе продиктувано от търсене на лесен път, а от убеждението, че натрупаният опит и знания могат и трябва да работят в полза на Русе.
-                </div>
-              </div>
-            </div>
+            <p>
+              В рамките на политическата си дейност се фокусирам върху регионалното развитие, привличането на стратегически инвестиции в Северна България и децентрализацията на публичните финанси, за да може заработените от русенци средства да се инвестират обратно в качеството на живот в нашия град.
+            </p>
           </div>
-        </div>
-      </section>
-
-
-
-      {/* Education & Academy */}
-      <section className="py-32 bg-slate-50 text-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-24">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-4 block">Подготовка и знания</span>
-            <h2 className="text-3xl md:text-5xl font-syne font-black italic tracking-tight">Образование с цел</h2>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
-            <div className="space-y-12">
-              <div className="flex gap-8 items-start">
-                <div className="w-16 h-16 bg-white flex items-center justify-center shrink-0 shadow-xl rounded-xl">
-                  <GraduationCap className="text-brand-600" size={32} />
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold tracking-tight">MBA & Финансова експертиза</h3>
-                  <p className="text-slate-500 text-lg leading-relaxed font-light">
-                    За мен образованието не е формалност, а инструмент за по-добри решения. MBA обучението и магистратурата ми по финанси ми дават способност да мисля не само оперативно, а и стратегически – как се изгражда устойчив модел и как се управлява ресурс.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-8 items-start">
-                <div className="w-16 h-16 bg-white flex items-center justify-center shrink-0 shadow-xl rounded-xl">
-                  <Building2 className="text-brand-600" size={32} />
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold tracking-tight">Политическа академия „Атанас Буров“</h3>
-                  <p className="text-slate-500 text-lg leading-relaxed font-light">
-                    Завърших 8-ми випуск на академията, където надградих своите знания по политически мениджмънт, лидерство и работа с обществени каузи – подготовка, която допълва професионалния ми профил.
-                  </p>
-                </div>
-              </div>
+          <div className="lg:col-span-5 space-y-12">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-6 block lg:text-right">Кауза</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950 uppercase leading-tight lg:text-right">
+                За <br className="hidden lg:block" />
+                <span className="text-brand-600">политиката</span>
+              </h2>
             </div>
-            <div className="grid grid-cols-2 gap-6 items-start">
-              <div className="bg-white p-4 shadow-xl rounded-2xl group">
-                <div className="aspect-[3/4] bg-slate-100 overflow-hidden rounded-xl">
-                  <img 
-                    src={IMAGES.about_achiever} 
-                    alt="Academic Achievement" 
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                  />
-                </div>
-              </div>
-              <div className="bg-white p-4 shadow-xl rounded-2xl group mt-8 sm:mt-12">
-                <div className="aspect-[3/4] bg-slate-100 overflow-hidden rounded-xl">
-                  <img 
-                    src={IMAGES.about_graduation} 
-                    alt="MBA Graduation" 
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-             <div className="bg-white p-6 shadow-2xl rounded-3xl group order-2 lg:order-1">
-              <div className="aspect-[3/2] bg-slate-100 overflow-hidden rounded-xl">
-                <img 
-                  src={IMAGES.about_academy} 
-                  alt="Political Academy" 
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                />
-              </div>
-            </div>
-            <div className="space-y-8 order-1 lg:order-2">
-              <blockquote className="text-2xl md:text-4xl font-syne font-bold italic text-slate-800 leading-tight">
-                „Образованието и практиката трябва да вървят ръка за ръка. По-малко лозунги, повече разбиране какво работи и как се постига реален резултат.“
-              </blockquote>
-              <div className="h-2 w-24 bg-brand-600 rounded-full" />
+            <div className="aspect-[4/3] w-full overflow-hidden border border-slate-200 shadow-xl rounded-[2rem] bg-slate-50">
+              <OptimizedImage
+                src={IMAGES.about_dsb}
+                alt="Росен Симеонов поема поста общински председател"
+                className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
+                fit="cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Values Grid */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6 text-black">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Users, title: "Семейство", desc: "Съпруг и баща. Гледам на развитието на Русе през перспективата на бъдещето за следващите поколения." },
-              { icon: Scale, title: "Принципи", desc: "Вярвам, че правилата трябва да важат еднакво за всички и че доверието се печели с последователност." },
-              { icon: Lightbulb, title: "Мислене", desc: "Фокус върху решения, а не върху шум. Моят управленски подход е изцяло основан на факти, ресурс и ефект." },
-              { icon: MapPin, title: "Връзка с Русе", desc: "Не наблюдавам отстрани. Избирам да бъда тук и да работя за мястото, от което съм тръгнал." }
-            ].map((item, id) => (
-              <motion.div
-                key={id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: id * 0.1 }}
-                className="p-6 sm:p-10 border border-slate-100 bg-white hover:border-brand-600 transition-all group rounded-2xl"
-              >
-                <div className="w-16 h-16 bg-slate-50 flex items-center justify-center rounded-2xl mb-8 group-hover:bg-brand-600 group-hover:text-white transition-colors">
-                  <item.icon size={32} />
-                </div>
-                <h4 className="text-xl font-bold italic mb-4 tracking-tight">{item.title}</h4>
-                <p className="text-slate-500 font-light text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
+      {/* BLOCK 2: ГРАЖДАНСКА АКТИВНОСТ (ALPHAINVEST.BG) */}
+      <section className="py-32 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16 lg:gap-20 items-center">
+          <div className="lg:col-span-5 relative w-full h-[450px] sm:h-[550px] bg-slate-50 overflow-hidden border border-slate-200 shadow-2xl rounded-[2rem]">
+            <OptimizedImage
+              src={IMAGES.about_conference}
+              alt="Финансова конференция AlphaInvest"
+              className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
+              fit="cover"
+            />
           </div>
-          
-          <div className="mt-20 grid lg:grid-cols-2 gap-12">
-            <div className="bg-slate-50 p-6 rounded-3xl shadow-lg group">
-              <div className="aspect-[16/10] overflow-hidden rounded-2xl">
-                <img src={IMAGES.about_family} alt="Family" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
-              </div>
+          <div className="lg:col-span-7 space-y-8">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-4 block">Просвещение</span>
+              <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight leading-tight uppercase text-slate-950">
+                Гражданска <br className="hidden lg:block" />
+                <span className="text-brand-600">активност</span>
+              </h2>
             </div>
-            <div className="bg-slate-50 p-6 rounded-3xl shadow-lg group">
-              <div className="aspect-[16/10] overflow-hidden rounded-2xl">
-                <img src={IMAGES.about_kickbox} alt="Kickbox" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AlphaInvest Section */}
-      <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-12 gap-20 items-center">
-          <div className="lg:col-span-7 space-y-10">
-            <span className="text-brand-500 font-black uppercase tracking-[0.4em] text-[10px]">Мисия за свобода</span>
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-syne font-black italic leading-[1.1] tracking-tight">AlphaInvest.bg</h2>
-            <div className="prose prose-invert prose-lg max-w-none">
-              <p className="text-white/70 font-light leading-relaxed text-xl">
-                Паралелно с професионалния си път, създадох AlphaInvest.bg – платформа за финансово образование. За мен икономическата грамотност не е просто знание, а фундаментът на гражданската свобода.
+            <div className="space-y-6 text-slate-500 text-lg leading-relaxed font-light font-sans">
+              <p>
+                Преди и паралелно с активната ми политическа дейност, моята голяма гражданска кауза винаги е била икономическото просвещение и изграждането на независими граждани. Воден от това разбиране, създадох <strong>AlphaInvest.bg</strong> — платформа за финансова грамотност и инвестиционна култура в България.
               </p>
-              <p className="text-white/70 font-light leading-relaxed">
-                Финансово независимият човек е много по-устойчив на популизъм и кризи. Когато умеете да градите дългосрочни стратегии, Вие ставате много по-взискателни към управлението на публичните средства.
+              <p>
+                Вярвам, че финансово образованото общество е много по-устойчиво на кризи, имунно срещу евтин политически популизъм и далеч по-взискателно към това как държавата и общините управляват публичните пари и данъците на гражданите.
               </p>
             </div>
-            <a 
-              href="https://www.alphainvest.bg" 
-              target="_blank" 
+            <a
+              href="https://www.alphainvest.bg"
+              target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 bg-brand-600 px-8 py-5 text-xs font-black uppercase tracking-widest hover:bg-white hover:text-brand-600 transition-all rounded-full"
+              className="inline-flex items-center gap-3 bg-slate-950 text-white font-bold text-xs uppercase tracking-widest hover:bg-brand-600 hover:text-white transition-all duration-500 px-10 py-5 rounded-full shadow-lg"
             >
-              Към платформата <Globe size={18} />
+              Към AlphaInvest.bg <Globe size={16} />
             </a>
           </div>
-          <div className="lg:col-span-5 relative">
-             <div className="aspect-video bg-white/5 overflow-hidden rounded-2xl border border-white/10 p-4">
-               <img src={IMAGES.about_conference} alt="Finance Conference" className="w-full h-full object-cover opacity-90" />
-             </div>
-             <div className="absolute -top-6 -left-6 w-24 h-24 border-l-4 border-t-4 border-brand-600 rounded-tl-2xl" />
-          </div>
         </div>
       </section>
 
-      {/* Newsletter Placement 2 */}
-      <section className="py-20 md:py-32 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <Newsletter 
-            variant="light" 
-          />
-        </div>
-      </section>
-
-      {/* Professional Experience */}
-      <section className="py-32 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6 text-black">
-          <div className="mb-20">
-            <span className="text-brand-600 font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-[10px] mb-4 block">Професионален път</span>
-            <h2 className="text-3xl md:text-5xl font-syne font-black italic tracking-tight">Управленски опит в Mattison</h2>
+      {/* BLOCK 3: КАРИЕРА */}
+      <section className="py-32 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          <div className="max-w-3xl">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-6 block">Реален сектор</span>
+            <h2 className="text-4xl md:text-6xl font-syne font-extrabold tracking-tighter italic text-slate-950 uppercase leading-none">
+              Професионална <span className="text-brand-600">кариера</span>
+            </h2>
           </div>
-
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-6 grid grid-cols-2 gap-8">
-              <div className="aspect-square bg-slate-50 overflow-hidden shadow-xl rounded-3xl p-4">
-                <img src={IMAGES.about_mattison_logo} alt="Mattison" className="w-full h-full object-contain" />
-              </div>
-              <div className="aspect-square bg-slate-50 overflow-hidden shadow-xl rounded-3xl translate-y-12 p-4">
-                <img src={IMAGES.about_mattison_manager} alt="Manager" className="w-full h-full object-cover object-top" />
-              </div>
+          
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <div className="lg:col-span-8 space-y-6 text-lg text-slate-500 leading-relaxed font-light font-sans">
+              <p>
+                Днес се занимавам активно с бизнес мениджмънт, консултиране на инвестиционни процеси и управление на проекти, но пътят ми назад е изцяло изграден в реалната икономика. Прекарах близо две десетилетия в Обединеното кралство, където преминах през всички нива на йерархията — от оперативна работа на терен до позиции с висока управленска и стратегическа отговорност в сферата на логистиката и генералния мениджмънт в Mattison.
+              </p>
+              <p>
+                Този международен опит ми даде организационно мислене, способност за управление на бюджети, оптимизация на ресурси и координация на сложни екипи под високо напрежение.
+              </p>
+              <p>
+                През 2022 г. взех категоричното решение да прекратя международната си кариера и да се завърна в родния си град Русе. Тук прилагам натрупаните бизнес модели, консултирайки предприемачи и развивайки собствени проекти в реалния сектор. Стремя се към висок професионализъм и вярвам, че управлението на една община изисква същите прагматични и ефективни бизнес подходи, каквито изисква и една успешна компания.
+              </p>
             </div>
-            <div className="lg:col-span-6 space-y-10">
-              <div className="prose prose-slate prose-lg text-slate-600 font-light leading-relaxed font-sans">
-                <p>
-                  Работата в международна среда изгради у мен дисциплина, отговорност и управленски поглед към процесите. Пътят ми в логистиката в Обединеното кралство не бе теоретичен, а изцяло изграден през практика и реални резултати.
-                </p>
-                <p>
-                  Именно този тип опит ми дава увереност да говоря пред Вас не с абстракции, а с истинско разбиране как се организира екип, как се носи лична отговорност и как се търси максимална ефективност на всеки ресурс.
-                </p>
+            
+            <div className="lg:col-span-4 flex flex-col gap-8">
+              <div className="p-6 bg-slate-50 border border-slate-100 flex items-center justify-center aspect-[4/3] shadow-sm rounded-2xl">
+                <OptimizedImage
+                  src={IMAGES.about_mattison_logo}
+                  alt="Mattison Cargo"
+                  className="max-h-full max-w-full"
+                  fit="contain"
+                />
               </div>
-              <div className="flex flex-wrap gap-8 pt-8">
-                {[
-                  { icon: ShieldCheck, label: "Дисциплина" },
-                  { icon: TrendingUp, label: "Ефективност" },
-                  { icon: Users, label: "Лидерство" }
-                ].map((skill, i) => (
-                  <div key={i} className="flex items-center gap-3 bg-slate-50 px-6 py-4 rounded-xl border border-slate-100 shadow-sm">
-                    <skill.icon className="text-brand-600" size={24} />
-                    <span className="text-xs font-black uppercase tracking-widest italic">{skill.label}</span>
-                  </div>
-                ))}
+              <div className="overflow-hidden border border-slate-100 aspect-square shadow-md rounded-2xl">
+                <OptimizedImage
+                  src={IMAGES.about_mattison_manager}
+                  alt="Управленски опит"
+                  className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
+                  fit="cover"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Political Commitment */}
-      <section className="py-32">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-20 items-center text-black">
-           <div className="lg:col-span-7 space-y-10">
-              <span className="text-brand-600 font-black uppercase tracking-[0.4em] text-[10px]">Обществена отговорност</span>
-              <h2 className="text-3xl sm:text-5xl md:text-7xl font-syne font-black italic tracking-tight text-slate-950">ДСБ и каузата за Русе</h2>
-              <div className="prose prose-slate prose-lg text-slate-600 font-light leading-relaxed">
-                <p className="text-xl italic">
-                  Ангажиментът ми към обществения живот не е случаен. Той идва от убеждението ми, че политиката има смисъл само ако е близо до хората, ако защитава ясни правила и ако носи реална отчетност.
-                </p>
-                <p>
-                  Работата ми в ДСБ Русе е естествено продължение на натрупания ми опит, на ценностите, които следвам, и на желанието ми Русе да има по-силно, честно и последователно представителство в управлението.
-                </p>
-              </div>
-              <div className="h-px w-full bg-slate-100" />
-              <div className="flex items-center gap-8">
-                <div className="w-20 h-20 bg-brand-600 flex items-center justify-center text-white rounded-3xl shadow-xl">
-                   <Heart size={40} />
-                </div>
-                <p className="text-2xl font-syne font-bold italic text-slate-900 tracking-tight leading-tight">
-                  „За Русе с последователност <br /> и работа по същество.“
-                </p>
-              </div>
-           </div>
-           <div className="lg:col-span-5 bg-white p-6 shadow-2xl rounded-[3rem] group">
-              <div className="aspect-[3/2] bg-slate-100 overflow-hidden rounded-[2rem]">
-                <img src={IMAGES.about_dsb} alt="ДСБ Русе" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-1000" />
-              </div>
-           </div>
+      {/* BLOCK 4: ДИСЦИПЛИНА И СПОРТ */}
+      <section className="py-32 bg-slate-950 text-white overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-5 relative order-2 lg:order-1">
+            <div className="aspect-[3/4] w-full max-w-md mx-auto overflow-hidden border border-white/10 shadow-2xl bg-white/[0.02] rounded-[2rem]">
+              <OptimizedImage
+                src={IMAGES.about_kickbox}
+                alt="Росен Симеонов - Черен колан по Кикбокс"
+                className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
+                fit="cover"
+              />
+            </div>
+          </div>
+          <div className="lg:col-span-7 space-y-8 order-1 lg:order-2">
+            <div className="flex items-center gap-3">
+              <Award className="text-brand-500" size={24} />
+              <span className="text-brand-400 text-xs uppercase tracking-[0.2em] font-bold">Характер</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-white uppercase leading-tight">
+              Черният колан: <br />
+              <span className="text-brand-600">дисциплина и спорт</span>
+            </h2>
+            <div className="space-y-6 text-white/70 text-lg leading-relaxed font-light font-sans">
+              <p>
+                Спортът изгражда характер и устойчивост, които нито една академична или корпоративна среда не може да замени. Защитаването на черен колан по кикбокс е личната ми история за желязна самодисциплина, хиляди часове целенасочен труд, преодоляване на трудностите и запазване на абсолютен фокус под напрежение.
+              </p>
+              <p>
+                Бойните изкуства учат на изключителен самоконтрол, бързо стратегическо мислене и дълбоко уважение към правилата и отсрещната страна. В реалния живот, бизнеса и обществената работа прилагам същата философия: пречките се преодоляват с хладнокръвие и фокус, а поетите ангажименти се изпълняват безкомпромисно и докрай.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-brand-600 text-white text-center sm:py-32">
+      {/* BLOCK 5: ОБРАЗОВАНИЕ (Променено на директни променливи за 100% сигурно показване) */}
+      <section className="py-32 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="lg:col-span-7 space-y-8">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-6 block">Подготовка</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950 uppercase leading-tight">
+                Образование <br />
+                <span className="text-brand-600">и подготовка</span>
+              </h2>
+            </div>
+            <div className="space-y-6 text-lg text-slate-500 leading-relaxed font-light font-sans">
+              <p>
+                Вярвам, че истинското и качествено образование се придобива най-вече по пътя на непрекъснатото самоусъвършенстване и учене през целия живот. Моята академична подготовка започна в Стопанска академия „Д. А. Ценов“ – Свищов, където завърших бакалавър по аграрна икономика и магистратура по финанси.
+              </p>
+              <p>
+                По-късно, вече стъпил стабилно в професионалния мениджмънт, завърших магистратура по бизнес администрация (MBA) в Anglia Ruskin University в Обединеното кралство. Тази квалификация ми даде теоретичния апарат да виждам голямата картина и да изграждам устойчиви финансови и организационни модели.
+              </p>
+              <p>
+                Надградих подготовката си в сферата на обществените процеси и лидерството, завършвайки 8-ия випуск на Политическата академия „Атанас Буров“ — опит, който ми помага да структурирам ясни и работещи политики в полза на гражданите.
+              </p>
+            </div>
+          </div>
+          <div className="lg:col-span-5 space-y-8">
+            <div className="grid grid-cols-2 gap-6">
+              <div className="border border-slate-200 shadow-md bg-white p-2 rounded-2xl flex items-center justify-center overflow-hidden">
+                <img
+                  src={imgAchiever}
+                  alt="Top Achiever Academic Award"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <div className="border border-slate-200 shadow-md bg-white p-2 rounded-2xl flex items-center justify-center overflow-hidden">
+                <img
+                  src={imgGraduation}
+                  alt="MBA Graduation Diploma"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+            <div className="w-full border border-slate-200 shadow-lg bg-white p-4 flex items-center justify-center overflow-hidden rounded-2xl">
+              <OptimizedImage
+                src={IMAGES.about_academy}
+                alt="Political Academy Atanas Burov"
+                className="w-full h-auto object-contain"
+                fit="contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BLOCK 6: СЕМЕЙСТВО */}
+      <section className="py-32 bg-slate-50 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 space-y-16">
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-4">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-4 block">Фундамент</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950 uppercase leading-none">
+                Личен живот <br />
+                <span className="text-brand-600">& семейство</span>
+              </h2>
+            </div>
+            <div className="lg:col-span-8 text-lg text-slate-500 leading-relaxed font-light font-sans">
+              <p>
+                Всичко, което ми дава истински сили, увереност и мотивация да вървя напред, което ме кара да се чувствам истински полезен, отговорен и щастлив, е моето семейство — моята съпруга и децата ми.
+              </p>
+              <p className="mt-4">
+                Завръщането ни в Русе беше изцяло семеен, осъзнат избор. Искам децата ми да растат тук, да познават корените си, да учат в български училища и да се свържат с духа на нашия град. Всяко мое действие в обществената работа е дълбоко мотивирано от желанието да оставим на следващото поколение един по-уреденост, по-силен и икономически развит Русе.
+              </p>
+            </div>
+          </div>
+          
+          <div className="aspect-[16/9] w-full overflow-hidden border border-slate-200 shadow-2xl bg-white rounded-[2rem]">
+            <OptimizedImage
+              src={IMAGES.about_family}
+              alt="Семейството на Росен Симеонов"
+              className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
+              fit="cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ CENTER */}
+      <section className="py-32 bg-white">
         <div className="max-w-4xl mx-auto px-6">
-           <h2 className="text-3xl sm:text-5xl md:text-8xl font-syne font-black italic mb-12 tracking-tighter">Нека градим бъдещето заедно.</h2>
-           <p className="text-xl md:text-2xl text-white/80 font-light mb-16 max-w-2xl mx-auto leading-relaxed">
-             Ако споделяте моята визия за по-силен и икономически стабилен Русе, свържете се с мен.
-           </p>
-           <Link 
-             to="/contact" 
-             className="inline-block px-10 md:px-14 py-5 md:py-7 bg-slate-950 text-white font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-brand-600 transition-all shadow-2xl rounded-full"
-           >
-             Свържете се с мен директно
-           </Link>
+          <div className="text-center mb-24">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-8 block">Диалог</span>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950">
+              Често задавани въпроси
+            </h3>
+          </div>
+          <div className="divide-y divide-slate-100 border-t border-slate-100">
+            {faqs.map((faq) => (
+              <FAQAccordion key={faq.question} item={faq} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NEWSLETTER */}
+      <section className="py-20 md:py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <Newsletter variant="light" />
+        </div>
+      </section>
+
+      {/* CTA SECTION */}
+      <section className="py-24 bg-brand-600 text-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-syne font-black italic tracking-tight mb-8 leading-tight">
+            Нека работим за по-силно бъдеще за Русе.
+          </h2>
+          <p className="text-xl text-white/85 leading-relaxed max-w-2xl mx-auto mb-12 font-light">
+            Ако споделяте визията за по-ефективно управление, икономическо развитие и повече възможности за Русе, свържете се с мен.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-block px-10 md:px-14 py-5 md:py-7 bg-slate-950 text-white font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-brand-600 transition-all shadow-2xl rounded-full"
+          >
+            Свържете се с мен
+          </Link>
         </div>
       </section>
     </div>

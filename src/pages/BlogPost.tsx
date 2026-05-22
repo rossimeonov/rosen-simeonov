@@ -73,7 +73,7 @@ export function BlogPost() {
 
   return (
     <div className="pt-32 bg-white min-h-screen">
-      {/* ИСТИНСКОТО SEO & GEO СЕ СЛУЧВА ТУК */}
+      {/* SEO & GEO СЕ СЛУЧВА ТУК */}
       <Helmet>
         <title>{post.seoTitle || post.title}</title>
         <meta name="description" content={post.seoDescription || post.excerpt} />
@@ -154,11 +154,14 @@ export function BlogPost() {
             <ReactMarkdown
               components={{
                 img: ({ node, ...props }) => (
-                  <OptimizedImage
-                    src={props.src || ''}
-                    alt={props.alt || ''}
-                    className="w-full h-auto rounded-2xl my-10 max-h-[550px]"
-                  />
+                  <div className="w-full aspect-[16/10] overflow-hidden rounded-2xl my-10 max-h-[550px] bg-slate-50">
+                    <OptimizedImage
+                      src={props.src || ''}
+                      alt={props.alt || ''}
+                      className="w-full h-full object-cover"
+                      fit="cover"
+                    />
+                  </div>
                 )
               }}
             >
@@ -248,18 +251,21 @@ export function BlogPost() {
         <aside className="lg:col-span-4 space-y-16">
           <Newsletter variant="brand" sidebar={true} />
 
-          {/* Related Articles */}
+          {/* FIX 1: Още публикации в страничната лента */}
           {allPosts.filter(p => p.id !== post.id).length > 0 && (
             <div>
               <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300 mb-8 border-b border-slate-100 pb-4">Още публикации</h4>
               <div className="space-y-10">
                 {allPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                   <Link key={other.id} to={`/publications/${other.slug}`} className="flex gap-4 group">
-                    <OptimizedImage
-                      src={other.image}
-                      alt={other.title}
-                      className="w-20 h-20 flex-shrink-0 grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
+                    <div className="w-20 h-20 aspect-square overflow-hidden rounded-xl bg-slate-50 flex-shrink-0 border border-slate-100">
+                      <OptimizedImage
+                        src={other.image}
+                        alt={other.title}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        fit="cover"
+                      />
+                    </div>
                     <div>
                       <span className="text-[9px] font-black uppercase tracking-widest text-brand-600 mb-1 block">{other.category}</span>
                       <h5 className="font-bold leading-tight group-hover:text-brand-600 transition-colors line-clamp-2 italic tracking-tight text-slate-900">{other.title}</h5>
@@ -272,7 +278,7 @@ export function BlogPost() {
         </aside>
       </div>
 
-      {/* Suggested Posts Section */}
+      {/* FIX 2: Препоръчано за Вас в долната част на екрана */}
       {allPosts.filter(p => p.id !== post.id).length > 0 && (
         <section className="py-32 bg-slate-50 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
@@ -280,15 +286,16 @@ export function BlogPost() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
               {allPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                 <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
-                  <div className="aspect-[16/9] mb-6 relative">
+                  <div className="aspect-[16/9] overflow-hidden bg-slate-50 border border-slate-100 rounded-[1.5rem] mb-6 relative">
                     <OptimizedImage 
                       src={other.image} 
                       alt={other.title} 
                       className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
+                      fit="cover"
                     />
                     <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
-                  <h3 className="text-xl font-bold group-hover:text-brand-600 transition-colors leading-tight mb-4 tracking-tight text-slate-900">
+                  <h3 className="text-xl font-bold group-hover:text-brand-600 transition-colors leading-tight mb-4 tracking-tight text-slate-950">
                     {other.title}
                   </h3>
                   <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-brand-600 transition-colors">
