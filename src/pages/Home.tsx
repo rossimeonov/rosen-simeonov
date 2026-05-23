@@ -1,5 +1,5 @@
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { ChevronRight, Globe, TrendingUp, MapPin, Plus, ArrowRight } from 'lucide-react';
+import { ChevronRight, Globe, TrendingUp, MapPin, Plus, ArrowRight, Award, ShieldCheck, Landmark, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
 import { visionPoints, blogPosts, mediaAppearances, faqs, FAQItem } from '../data';
 import { Contact } from '../components/Contact';
@@ -7,21 +7,23 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { IMAGES } from '../constants';
 import { Newsletter } from '../components/Newsletter';
+import { OptimizedImage } from '../components/OptimizedImage';
+import { TikTokFeed } from '../components/TikTokFeed';
 
 function FAQAccordion({ item }: { item: FAQItem }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-slate-100 overflow-hidden">
       <button onClick={() => setIsOpen(!isOpen)} className="w-full py-6 md:py-8 flex justify-between items-center text-left hover:text-brand-600 transition-colors group">
-        <span className="text-xl md:text-2xl font-bold tracking-tight italic">{item.question}</span>
-        <motion.div animate={{ rotate: isOpen ? 45 : 0 }} className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-600 group-hover:text-white transition-all shadow-sm">
+        <span className="text-xl md:text-2xl font-bold tracking-tight text-slate-950">{item.question}</span>
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center text-slate-400 transition-all shadow-sm ${isOpen ? 'bg-brand-600 text-white rotate-45' : 'bg-slate-50 group-hover:bg-brand-600 group-hover:text-white'}`}>
           <Plus size={20} />
-        </motion.div>
+        </div>
       </button>
       <AnimatePresence>
         {isOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <p className="pb-8 text-slate-500 text-lg font-light leading-relaxed">{item.answer}</p>
+            <p className="pb-8 text-slate-600 text-lg font-light leading-relaxed font-sans">{item.answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -33,61 +35,133 @@ export function Home() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Росен Симеонов",
+    "jobTitle": "Финансов експерт и икономист",
+    "description": "Росен Симеонов е финансист и икономист с международен управленски опит, фокусиран върху икономическото развитие на Русе, инвестициите и финансовата грамотност.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Русе",
+      "addressRegion": "Северна България",
+      "addressCountry": "BG"
+    },
+    "knowsAbout": [
+      "Финанси",
+      "Инвестиции",
+      "Икономика",
+      "Местно управление",
+      "Финансова грамотност",
+      "Регионално развитие"
+    ],
+    "publishingPrinciples": "https://schema.org/HelpfulContent"
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": "faq-" + faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <>
       <Helmet>
-        <title>Росен Симеонов | Опит, визия и ясна бизнес стратегия за Русе</title>
-        <meta name="description" content="Русе има потенциала да бъде икономическото сърце на Северна България. Открийте визията и прагматичните икономически решения на Росен Симеонов." />
+        <title>Росен Симеонов | Финанси, Икономика и Стратегическо Развитие за Русе</title>
+        <meta name="description" content="Росен Симеонов е финансист и икономист с международен управленски опит, фокусиран върху икономическото развитие на Русе, чуждестранните инвестиции и финансовата грамотност." />
+        <meta name="keywords" content="Росен Симеонов, Русе, финанси, икономика, инвестиции, местно управление, финансова грамотност, Северна България, ДСБ Русе" />
+        <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-brand-600 origin-[0%] z-[60]" style={{ scaleX }} />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center lg:pt-0 pt-24 overflow-hidden bg-brand-950">
-        <div className="absolute inset-0 z-0 bg-cover bg-center brightness-[0.12] opacity-75" style={{ backgroundImage: `url(${IMAGES.hero_bg})` }} />
+      {/* HERO SECTION */}
+      <section id="hero" className="relative min-h-[95vh] flex items-center pt-36 pb-16 overflow-hidden bg-brand-950 text-white">
+        <div className="absolute inset-0 z-0 bg-cover bg-center brightness-[0.1] opacity-80" style={{ backgroundImage: `url(${IMAGES.hero_bg})` }} />
+        
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center w-full relative z-10">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }} className="relative z-20">
-            <div className="flex items-center gap-4 mb-8"><div className="h-px w-8 bg-brand-600" /><span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-500">Русенец • Икономист • Финансист</span></div>
-            <h1 className="text-4xl md:text-9xl lg:text-[10rem] font-syne font-extrabold leading-[0.8] tracking-tighter mb-10 text-white">Росен<br/><span className="text-brand-600">Симеонов</span></h1>
-            <p className="text-xl md:text-2xl text-white/70 max-w-xl leading-relaxed mb-12 font-medium italic font-serif">Русе има потенциала да бъде икономическото сърце на Северна България. Време е за прагматизъм, а не за протоколен пиар.</p>
-            <Link to="/about" className="px-10 py-5 bg-white text-brand-950 font-bold text-xs uppercase tracking-widest hover:bg-brand-600 hover:text-white transition-all duration-500 flex items-center gap-3 group">
-              Вижте решенията за Русе <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
-          <div className="relative lg:h-[80vh] aspect-[4/5] mx-auto lg:mx-0">
-            <div className="h-full w-full overflow-hidden border border-white/10 shadow-2xl">
-              <img src={IMAGES.hero_portrait} alt="Росен Симеонов" className="h-full w-full object-cover grayscale opacity-90" />
+          <div className="relative z-20 space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="h-px w-8 bg-brand-600" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-500">Русенец • Икономист • Финансист</span>
             </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-syne font-extrabold leading-[0.95] tracking-tighter text-white uppercase">
+              <span className="sr-only">Росен Симеонов – финансист, икономист и обществено ангажиран глас за Русе</span>
+              Росен<br/><span className="text-brand-600">Симеонов</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-white/80 max-w-xl leading-relaxed font-sans font-light">
+              Росен Симеонов е финансист и икономист с международен управленски опит, фокусиран върху икономическото развитие на Русе, привличането на инвестиции в Северна България и изграждането на висока финансова грамотност.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 text-xs font-black uppercase tracking-wider text-white/60 pt-2">
+              <span className="flex items-center gap-1.5"><Award size={14} className="text-brand-500" /> MBA степен</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-brand-500" /> 20+ г. Международен опит</span>
+              <span className="flex items-center gap-1.5"><Landmark size={14} className="text-brand-500" /> Финансова експертиза</span>
+            </div>
+
+            <div className="pt-4">
+              <Link to="/about" className="px-10 py-5 bg-white text-brand-950 font-bold text-xs uppercase tracking-widest hover:bg-brand-600 hover:text-white transition-all duration-300 inline-flex items-center gap-3 group rounded-full shadow-lg">
+                Вижте решенията за Русе <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+          
+          <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 w-full overflow-hidden border border-white/10 shadow-2xl bg-brand-900 rounded-[2rem]">
+            <OptimizedImage 
+              src={IMAGES.hero_portrait} 
+              alt="Росен Симеонов – икономически експерт за град Русе" 
+              className="h-full w-full object-cover grayscale opacity-90"
+              fit="cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* Intro Block */}
-      <section className="py-32 bg-white">
+      {/* INTRO BLOCK */}
+      <section id="intro" className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-20">
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5 space-y-6">
                <span className="section-label">Накратко</span>
-               <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950 mb-12 leading-tight">Икономически <span className="text-brand-600">прагматизъм</span> за Русе.</h2>
-               <p className="text-lg text-slate-500 leading-relaxed font-normal mb-12">
-                 След близо 20 години работа в Лондон, направих съзнателен личен избор – да се завърна в родния си Русе. Вярвам, че нашият град няма проблем с обективния потенциал, а с управлението на ресурсите. <br/><br/>
-                 Промяната изисква три конкретни неща: привличане на реални инвестиции с висока добавена стойност, радикално повишаване на финансовата грамотност и край на договарянето на тъмно.
-               </p>
-               <Link to="/about" className="text-xs font-black uppercase tracking-widest text-brand-600 border-b border-brand-600 pb-1">Пълна Биография</Link>
+               <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950 leading-tight">
+                 Икономически <span className="text-brand-600">прагматизъм</span> за Русе.
+               </h2>
+               <div className="text-lg text-slate-600 leading-relaxed font-light space-y-6 font-sans">
+                 <p>
+                   Дълбоко споделям принципа, че там, където няма ред, ясни правила и законност — няма и истинска свобода. След близо 20 години работа в международна бизнес среда в Лондон, направих съзнателен личен избор да се завърна в родния си Русе. Вярвам, че нашият град няма проблем с обективния потенциал, а с ефективното управление на ресурсите.
+                 </p>
+                 <p>
+                   Реалната и трайна промяна за местната икономика в Русе и Северна България изисква три конкретни неща: привличане на инвестиции с висока добавена стойност, регионална децентрализация и край на задкулисните уговорки.
+                 </p>
+               </div>
+               <div className="pt-4">
+                 <Link to="/about" className="text-xs font-black uppercase tracking-widest text-brand-600 border-b-2 border-brand-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-colors">Пълна Биография</Link>
+               </div>
             </div>
+            
             <div className="lg:col-span-7">
-              <div className="grid sm:grid-cols-2 gap-8">
-                 {[
-                  { icon: Globe, title: "Глобален опит", desc: "Две десетилетия на предната линия в международните финансови среди. Знам какво търси съвременният капитал." },
-                  { icon: TrendingUp, title: "Финансова култура", desc: "Финансовата грамотност е единствената трайна основа на личната свобода. Независимите хора изграждат силен град." },
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  { icon: Globe, title: "Глобален опит", desc: "Две десетилетия на предната линия в международните финансови и логистични среди. Знам какво търси съвременният капитал." },
+                  { icon: TrendingUp, title: "Финансова култура", desc: "Финансовата грамотност и платформата AlphaInvest.bg са основата на личната свобода. Независимите хора изграждат силен град." },
                   { icon: MapPin, title: "Русенски корен", desc: "Завръщането ми е съзнателен и дългосрочен залог за бъдещето на Русе – тук е моето семейство и моята кауза." },
-                  { icon: Plus, title: "Визия 2030", desc: "Радикална реформа в общинската дигитална инфраструктура и пълна прозрачност при всеки изхарчен лев." }
+                  { icon: Plus, title: "Ясна визия", desc: "Радикална реформа в дигиталната инфраструктура на община Русе и пълна финансова прозрачност за всеки изхарчен лев." }
                 ].map((item, i) => (
-                  <div key={i} className="p-6 sm:p-10 bg-slate-50 flex flex-col justify-between hover:bg-brand-600 hover:text-white transition-all duration-500 group">
-                    <item.icon size={24} className="mb-12" />
+                  <div key={i} className="p-8 bg-slate-50 flex flex-col justify-between hover:bg-brand-600 hover:text-white border border-slate-100 transition-all duration-500 group rounded-[1.5rem]">
+                    <item.icon size={24} className="mb-8 text-brand-600 group-hover:text-white transition-colors" />
                     <div>
-                      <h3 className="text-lg font-black uppercase tracking-tight mb-2">{item.title}</h3>
-                      <p className="text-slate-500 leading-relaxed font-light text-sm group-hover:text-white/70">{item.desc}</p>
+                      <h3 className="text-sm font-black uppercase tracking-wider mb-2 font-syne">{item.title}</h3>
+                      <p className="text-slate-500 leading-relaxed font-light text-sm group-hover:text-white/80 font-sans">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -97,21 +171,22 @@ export function Home() {
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section className="py-32 bg-slate-900 text-white overflow-hidden relative">
+      {/* PRIORITIES / VISION SECTION */}
+      <section id="vision" className="py-32 bg-slate-900 text-white overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24 max-w-4xl mx-auto">
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-6 block">Приоритети</span>
-            <h2 className="text-4xl md:text-[5.5rem] font-syne font-extrabold tracking-tight leading-none mb-10">Ясни стъпки за <span className="text-brand-600">по-силен град</span></h2>
+            <h2 className="text-4xl md:text-6xl font-syne font-extrabold tracking-tight leading-none mb-6">Ясни стъпки за <span className="text-brand-600">по-силен град</span></h2>
+            <p className="text-white/60 font-sans font-light max-w-xl mx-auto text-base">Прагматична стратегия за икономически растеж, нови инвестиции в Русе и стабилна местна икономика.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {visionPoints.map((point, idx) => (
-              <div key={idx} className="p-6 sm:p-10 bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-brand-600/30 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-6 text-7xl font-black text-white/[0.02] group-hover:text-brand-600/5 select-none">0{idx + 1}</div>
+              <div key={idx} className="p-8 bg-white/[0.01] border border-white/5 hover:bg-white/[0.04] hover:border-brand-600/40 transition-all duration-500 group relative overflow-hidden rounded-2xl">
+                <div className="absolute top-0 right-0 p-6 text-7xl font-black text-white/[0.01] group-hover:text-brand-600/5 select-none">0{idx + 1}</div>
                 <div className="relative z-10">
-                  <div className="h-1 w-12 bg-brand-600 mb-8 group-hover:w-24 transition-all duration-500" />
-                  <h4 className="text-2xl font-syne font-bold mb-4 tracking-tight group-hover:text-brand-500 transition-colors uppercase">{point.title}</h4>
-                  <p className="text-white/50 leading-relaxed font-light text-sm italic">{point.description}</p>
+                  <div className="h-1 w-12 bg-brand-600 mb-8 group-hover:w-20 transition-all duration-500" />
+                  <h4 className="text-xl font-syne font-bold mb-4 tracking-tight group-hover:text-brand-500 transition-colors uppercase">{point.title}</h4>
+                  <p className="text-white/50 leading-relaxed font-light text-sm font-sans">{point.description}</p>
                 </div>
               </div>
             ))}
@@ -119,32 +194,42 @@ export function Home() {
         </div>
       </section>
 
-      {/* Latest Blog */}
-      <section className="py-32 bg-white">
+      {/* PUBLICATIONS */}
+      <section id="publications" className="py-32 bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
             <div className="max-w-2xl">
               <span className="section-label">Публикации</span>
-              <h2 className="text-3xl md:text-6xl font-syne font-extrabold tracking-tight text-slate-950 leading-none">Последни анализи</h2>
+              <h2 className="text-3xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950 leading-none">Последни анализи</h2>
             </div>
-            <Link to="/publications" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-600 border-b border-brand-600 pb-1">Всички статии <ArrowRight size={14} /></Link>
+            <Link to="/publications" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-600 border-b-2 border-brand-600 pb-1 hover:text-slate-950 hover:border-slate-950 transition-colors">Всички статии <ArrowRight size={14} /></Link>
           </div>
+          
           <div className="grid lg:grid-cols-12 gap-16">
             <div className={blogPosts.length > 1 ? "lg:col-span-8" : "lg:col-span-12"}>
               {blogPosts[0] && (
-                <Link to={`/publications/${blogPosts[0].slug}`} className="group">
-                  <div className="aspect-[16/9] overflow-hidden mb-10"><img src={blogPosts[0].image} alt="Featured" className="h-full w-full object-cover grayscale group-hover:grayscale-0" /></div>
-                  <div className="flex gap-6 items-center mb-8 text-[10px] font-bold uppercase tracking-widest text-slate-400"><span className="text-brand-600">{blogPosts[0].category}</span><span>{blogPosts[0].date}</span></div>
-                  <h3 className="text-2xl md:text-5xl font-syne font-extrabold mb-8 text-slate-950 group-hover:text-brand-600 transition-colors leading-tight">{blogPosts[0].title}</h3>
+                <Link to={`/publications/${blogPosts[0].slug}`} className="group block">
+                  <div className="aspect-[16/9] overflow-hidden mb-8 rounded-[2rem] border border-slate-100 shadow-sm bg-slate-50">
+                    <OptimizedImage src={blogPosts[0].image} alt={blogPosts[0].title} className="h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700" fit="cover" />
+                  </div>
+                  <div className="flex gap-6 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                    <span className="text-brand-600">{blogPosts[0].category}</span>
+                    <span>{blogPosts[0].date}</span>
+                  </div>
+                  <h3 className="text-2xl md:text-4xl font-syne font-extrabold text-slate-950 group-hover:text-brand-600 transition-colors leading-tight tracking-tight">{blogPosts[0].title}</h3>
                 </Link>
               )}
             </div>
+            
             {blogPosts.length > 1 && (
               <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100 border-t border-slate-100">
                 {blogPosts.slice(1, 4).map((post) => (
-                  <Link key={post.id} to={`/publications/${post.slug}`} className="py-10 group first:pt-4">
-                    <div className="flex gap-4 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-brand-600"><span>{post.category}</span><span className="text-slate-400">{post.date}</span></div>
-                    <h4 className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors leading-tight">{post.title}</h4>
+                  <Link key={post.id} to={`/publications/${post.slug}`} className="py-8 group first:pt-4">
+                    <div className="flex gap-4 items-center mb-3 text-[10px] font-bold uppercase tracking-widest text-brand-600">
+                      <span>{post.category}</span>
+                      <span className="text-slate-400">{post.date}</span>
+                    </div>
+                    <h4 className="text-lg font-bold tracking-tight text-slate-900 group-hover:text-brand-600 transition-colors leading-tight font-sans">{post.title}</h4>
                   </Link>
                 ))}
               </div>
@@ -153,28 +238,72 @@ export function Home() {
         </div>
       </section>
 
-      {/* Media Highlight */}
-      <section className="py-32 bg-slate-50">
+      {/* МЕДИЙНО ПРИСЪСТВИЕ */}
+      <section id="media" className="py-32 bg-slate-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-           <div className="flex justify-between items-start mb-20">
-              <div className="max-w-2xl"><span className="section-label">Медии</span><h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950">Медийно присъствие</h2></div>
-              <Link to="/media" className="px-8 py-4 bg-white border border-slate-200 text-[10px] font-black uppercase tracking-widest hover:border-brand-600">Всички Участия</Link>
+           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
+              <div className="max-w-2xl">
+                <span className="section-label">Медии</span>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950">Медийно присъствие</h2>
+              </div>
+              <Link to="/media" className="px-8 py-4 bg-white border border-slate-200 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-slate-950 hover:text-white transition-all shadow-sm">Всички Участия</Link>
            </div>
-           <div className="grid md:grid-cols-2 gap-px bg-slate-200">
-              {mediaAppearances.slice(0, 4).map((m, idx) => (
-                <div key={idx} className="p-8 sm:p-12 bg-white flex flex-col justify-between group hover:bg-brand-50 transition-all duration-500">
-                   <p className="text-2xl font-medium text-slate-900 leading-relaxed mb-10 italic font-serif">„{m.description}“</p>
-                   <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 font-syne italic">{m.source}</div>
-                </div>
+           
+           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {mediaAppearances.slice(0, 3).map((m, idx) => (
+                <a 
+                  key={idx} 
+                  href={m.link || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white rounded-[2rem] border-b-4 border-slate-200 hover:border-brand-600 p-8 shadow-md hover:shadow-xl transition-all duration-500 flex flex-col justify-between h-full"
+                >
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1.5 rounded-full transition-colors group-hover:bg-brand-600 group-hover:text-white">
+                        {m.source}
+                      </span>
+                      <span className="text-[9px] font-medium text-slate-400">Интервю / Мнение</span>
+                    </div>
+                    
+                    <p className="text-slate-950 font-serif font-medium text-lg leading-relaxed tracking-tight group-hover:text-brand-600 transition-colors line-clamp-5">
+                      „{m.description}“
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-900 transition-colors pt-6 border-t border-slate-100 mt-6">
+                    Преглед на медията <ExternalLink size={12} />
+                  </div>
+                </a>
               ))}
            </div>
         </div>
       </section>
 
+      {/* DYNAMIC TIKTOK FEED SECTION — АВТОМАТИЧНО ОБНОВЯВАЩ СЕ РЕД С ПОСЛЕДНИТЕ ВИДЕА */}
+      <section id="tiktok-videos" className="py-32 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="section-label">Динамично съдържание</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950">
+              Последни видеа в <span className="text-brand-600">TikTok</span>
+            </h2>
+          </div>
+
+          {/* Извикване на новия асинхронен уиджет */}
+          <TikTokFeed />
+        </div>
+      </section>
+
       {/* FAQ Center */}
-      <section className="py-32 bg-white">
+      <section id="faq" className="py-32 bg-white border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-24"><span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-8 block">Диалог</span><h3 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight italic text-slate-950">Често задавани въпроси</h3></div>
+          <div className="text-center mb-24">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-600 mb-8 block">Диалог</span>
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950">
+              Често задавани въпроси
+            </h3>
+          </div>
           <div className="divide-y divide-slate-100 border-t border-slate-100">
             {faqs.map((faq) => (
               <FAQAccordion key={faq.question} item={faq} />
@@ -184,7 +313,11 @@ export function Home() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-20 md:py-24 bg-slate-50"><div className="max-w-7xl mx-auto px-6"><Newsletter variant="light" /></div></section>
+      <section id="newsletter" className="py-20 md:py-24 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <Newsletter variant="light" />
+        </div>
+      </section>
 
       <Contact />
     </>
