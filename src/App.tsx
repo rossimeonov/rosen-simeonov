@@ -5,8 +5,9 @@ import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Publications } from './pages/Publications';
 import { BlogPost } from './pages/BlogPost';
+import { Media } from './pages/Media';
 import { Contact } from './pages/Contact';
-import { NotFound } from './pages/NotFound'; // 1. Добавихме импорта за твоята 404 страница
+import { NotFound } from './pages/NotFound'; 
 import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
