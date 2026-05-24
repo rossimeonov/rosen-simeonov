@@ -6,6 +6,7 @@ import { About } from './pages/About';
 import { Publications } from './pages/Publications';
 import { BlogPost } from './pages/BlogPost';
 import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound'; // 1. Добавихме импорта за твоята 404 страница
 import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
             <Route path="/publications" element={<Publications />} />
             <Route path="/publications/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
+            
+            {/* 2. НАЙ-ОТДОЛУ: Хващаме всеки друг грешен адрес и показваме NotFound */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
