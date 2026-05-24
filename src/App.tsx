@@ -5,8 +5,9 @@ import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Publications } from './pages/Publications';
 import { BlogPost } from './pages/BlogPost';
-import { Media } from './pages/media';
+import Media from './pages/Media';
 import { Contact } from './pages/Contact';
+import { Subscribe } from './pages/Subscribe'; 
 import { NotFound } from './pages/NotFound'; 
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -22,9 +23,13 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/publications" element={<Publications />} />
             <Route path="/publications/:slug" element={<BlogPost />} />
+            <Route path="/media" element={<Media />} />
             <Route path="/contact" element={<Contact />} />
             
-            {/* 2. НАЙ-ОТДОЛУ: Хващаме всеки друг грешен адрес и показваме NotFound */}
+            {/* Добавен липсващ маршрут за абониране */}
+            <Route path="/subscribe" element={<Subscribe />} />
+            
+            {/* Хващач на грешки */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
