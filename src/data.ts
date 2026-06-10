@@ -1,5 +1,4 @@
-import { IMAGES } from './constants';
-import { allBlogPosts } from './data/posts'; // Вземаме трите отделени статии
+import { blogPosts as allBlogPosts } from './data/posts';
 
 export interface NavItem {
   label: string;
@@ -39,11 +38,11 @@ export const navItems: NavItem[] = [
   { label: 'Контакт', href: '/contact' },
 ];
 
-// ПРЕНАПИСАНИ: Твоите 6 приоритета с икономически прагматизъм и конкретното "КАК"
+// Твоите приоритети
 export const visionPoints: VisionPoint[] = [
   { 
     title: 'Икономика и инвестиции', 
-    description: 'Създаване на Инвестиционна агенция „Русе“ и подготовка на готови индустриални терени с изградена инфраструктура, за да спрем да губим инвеститори в полза на други региони поради административно бездействие.' 
+    description: 'Създаване на Инвестиционна агенция „Русе“ и подготовка на готови индустриални терени с изградена infrastructure, за да спрем да губим инвеститори в полза на други региони поради административно бездействие.' 
   },
   { 
     title: 'Финансова грамотност', 
@@ -67,37 +66,44 @@ export const visionPoints: VisionPoint[] = [
   }
 ];
 
-// Насочваме стария масив директно към новите три файла
+// Насочваме масива
 export const blogPosts = allBlogPosts;
 
+// Обновените и подредени медийни участия
 export const mediaAppearances: MediaItem[] = [
   { 
-  source: 'Rousse.info', 
-  description: 'Коалиция ПП-ДБ регистрира листата си с кандидати в Русе.', 
-  link: 'https://rousse.info/koalicziya-prodalzhavame-promyanata...',
-  date: '2026' 
-},
+    source: 'Rousse.info', 
+    description: 'Коалиция ПП-ДБ регистрира листата си с кандидати в Русе.', 
+    link: 'https://rousse.info/koalicziya-prodalzhavame-promyanata-demokratichna-balgariya-registrira-lista-ot-kandidati-za-narodni-predstaviteli-v-19-i-mir-ruse-video/',
+    date: '17.03.2026' 
+  },
+  { 
+    source: 'Медийна позиция', 
+    description: 'ПП - ДБ дават сделката за големия ТИР паркинг в Русе на прокуратурата', 
+    link: 'https://kiss13.net/news/ruse/pp-db-davat-sdelkata-za-golemiya-tir-parking-v-ruse-na-prokuraturata',
+    date: '04.02.2026' 
+  },
   { 
     source: 'Economy.bg', 
     description: 'За грешките на индивидуалните инвеститори и нуждата от финансова дисциплина.', 
     link: 'https://www.economy.bg/featured/view/63166/Kakvi-greshki-dopuskat-naj-chesto-individualnite-investitori-v-Bylgariya',
-    date: '2024' 
+    date: '30.01.2026' 
   },
   { 
     source: 'Вестник Утро', 
-    description: 'За завръщането в Русе и смисъла от почтено обществено представителство.', 
-    link: 'https://www.economy.bg/featured/view/63166/Kakvi-greshki-dopuskat-naj-chesto-individualnite-investitori-v-Bylgariya',
-    date: '2024' 
+    description: 'Новият председател на ДСБ в Русе Росен Симеонов: Трябва да сме сред хората, да отговаряме и на неудобните въпроси дори. Това е начинът', 
+    link: 'https://utroruse.com/article/1179302/',
+    date: '21.12.2025' 
   },
-  { 
-    source: 'KISS 13', 
-    description: 'За защита на обществения интерес и нуждата от ясни правила в управлението.', 
-    link: 'https://kiss13.net/news/ruse/pp-db-davat-sdelkata-za-golemiya-tir-parking-v-ruse-na-prokuraturata',
-    date: '2024' 
-  },
+  {
+    source: 'Дунав Мост',
+    description: 'Росен Симеонов: В Русе плащаме най-високите данъци, при рекордно ниска събираемост',
+    link: 'https://www.dunavmost.com/novini/rosen-simeonov-v-ruse-plashtame-nai-visokite-danatsi-pri-rekordno-niska-sabiraemost',
+    date: '30.11.2025'
+  }
 ];
 
-// ПРЕНАПИСАНИ: Често задавани въпроси, максимално SEO и GEO оптимизирани за търсения в Русе
+// Често задавани въпроси
 export const faqs: FAQItem[] = [
   { 
     question: 'Кой е Росен Симеонов и защо се завръща в град Русе?', 
@@ -113,6 +119,6 @@ export const faqs: FAQItem[] = [
   },
   { 
     question: 'Какви са конкретните решения за привличане на инвестиции в региона?', 
-    answer: 'Решенията изискват радикална реформа на общинския инвестиционен портал, премахване на бюрокрацията чрез реално обслужване на бизнеса на едно гише, и предварително изграждане на локална инфраструктура в индустриалните зони за компании с високоплатени работни места.' 
-  },
+    answer: 'Решенията изискват засилена дигитализация, премахване на бюрокрацията чрез реално обслужване на бизнеса на едно гише, и предварително изграждане на локална инфраструктура в индустриалните зони.' 
+  }
 ];

@@ -75,18 +75,18 @@ export function BlogPost() {
     <div className="pt-32 bg-white min-h-screen">
       {/* SEO & GEO СЕ СЛУЧВА ТУК */}
       <Helmet>
-        <title>{post.seoTitle || post.title}</title>
-        <meta name="description" content={post.seoDescription || post.excerpt} />
-        <meta property="og:title" content={post.seoTitle || post.title} />
-        <meta property="og:description" content={post.seoDescription || post.excerpt} />
+        <title>{post.seo?.title || post.seoTitle || post.title}</title>
+        <meta name="description" content={post.seo?.description || post.seoDescription || post.excerpt} />
+        <meta property="og:title" content={post.seo?.title || post.seoTitle || post.title} />
+        <meta property="og:description" content={post.seo?.description || post.seoDescription || post.excerpt} />
         <meta property="og:image" content={post.image} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.seoTitle || post.title} />
-        <meta name="twitter:description" content={post.seoDescription || post.excerpt} />
+        <meta name="twitter:title" content={post.seo?.title || post.seoTitle || post.title} />
+        <meta name="twitter:description" content={post.seo?.description || post.seoDescription || post.excerpt} />
         <meta name="twitter:image" content={post.image} />
 
         {/* Инжектиране на GEO структурирани данни */}

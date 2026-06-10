@@ -223,7 +223,7 @@ export function Home() {
             
             {blogPosts.length > 1 && (
               <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100 border-t border-slate-100">
-                {blogPosts.slice(1, 4).map((post) => (
+                {blogPosts.slice(1, 4).map((post: any) => (
                   <Link key={post.id} to={`/publications/${post.slug}`} className="py-8 group first:pt-4">
                     <div className="flex gap-4 items-center mb-3 text-[10px] font-bold uppercase tracking-widest text-brand-600">
                       <span>{post.category}</span>

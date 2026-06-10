@@ -1,4 +1,4 @@
-import { allBlogPosts } from './data/posts';
+import { blogPosts } from './data'; // Насочено към твоя централен файл за данни
 
 export interface BlogPostMarkdown {
   id: string;
@@ -11,11 +11,15 @@ export interface BlogPostMarkdown {
   content: string;
   seoTitle?: string;
   seoDescription?: string;
+  seo?: {
+    title?: string;
+    description?: string;
+  };
 }
 
 export function getAllPosts(): BlogPostMarkdown[] {
-  // Връщаме директно новите отделени статии
-  return allBlogPosts;
+  // Използваме експортирания масив от src/data.ts
+  return blogPosts as BlogPostMarkdown[];
 }
 
 export function getPostBySlug(slug: string): BlogPostMarkdown | undefined {
