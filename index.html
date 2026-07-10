@@ -4,14 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    
+
     <title>Росен Симеонов – Опит, дисциплина и ясна визия за Русе</title>
     <meta name="description" content="Официален уебсайт на Росен Симеонов – икономист, финансист и общественик. Открийте неговата визия за развитието на град Русе, икономически анализи и обществени позиции." />
-    <meta name="keywords" content="Росен Симеонов, Русе, икономист, финансист, предприемач, визия за Русе, икономика, развитие, Северна България, Дунав регион" />
-    
-    <meta name="geo.region" content="BG-18" /> <meta name="geo.placename" content="Русе" />
-    <meta name="geo.position" content="43.8356;25.9657" />
-    <meta name="ICBM" content="43.8356, 25.9657" />
+
+    <link rel="canonical" href="https://www.rosensimeonov.com/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.rosensimeonov.com/" />
@@ -29,73 +26,71 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Росен Симеонов",
-        "url": "https://www.rosensimeonov.com",
-        "jobTitle": "Икономист, Финансист, Предприемач",
-        "description": "Икономист и финансист с международен опит и визия за развитието на Русе и Северна България.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Русе",
-          "addressRegion": "Северна България",
-          "addressCountry": "BG"
-        },
-        "knowsAbout": [
-          "Финанси",
-          "Икономика",
-          "Инвестиции",
-          "Регионално развитие",
-          "Местно управление"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://www.rosensimeonov.com/#person",
+            "name": "Росен Симеонов",
+            "url": "https://www.rosensimeonov.com",
+            "image": "https://www.rosensimeonov.com/assets/hero_portrait.jpg",
+            "jobTitle": "Икономист, Финансист, Предприемач",
+            "description": "Икономист и финансист с международен опит и визия за развитието на Русе и Северна България. Председател на ДСБ Русе.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Русе",
+              "addressRegion": "Северна България",
+              "addressCountry": "BG"
+            },
+            "email": "info@rosensimeonov.com",
+            "sameAs": [
+              "https://www.facebook.com/rosen.simeonov.12/",
+              "https://www.linkedin.com/in/rosen-simeonov-489a8a6a"
+            ],
+            "knowsAbout": [
+              "Финанси",
+              "Икономика",
+              "Инвестиции",
+              "Регионално развитие",
+              "Местно управление",
+              "Обществени поръчки"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.rosensimeonov.com/#website",
+            "url": "https://www.rosensimeonov.com",
+            "name": "Росен Симеонов",
+            "inLanguage": "bg",
+            "publisher": { "@id": "https://www.rosensimeonov.com/#person" }
+          }
         ]
       }
     </script>
   </head>
   <body>
-    <div id="root">
+    <div id="root"></div>
+    <noscript>
       <header style="padding: 20px; text-align: center;">
         <h1>Росен Симеонов – Опит, дисциплина и ясна визия за Русе</h1>
         <p>Икономист, финансист и общественик. Председател на ДСБ Русе.</p>
+        <nav>
+          <a href="/publications">Публикации</a> ·
+          <a href="/about">За Росен</a> ·
+          <a href="/contact">Контакти</a> ·
+          <a href="/media">Медии</a>
+        </nav>
       </header>
       <main style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: sans-serif; line-height: 1.6;">
-        <section>
-          <h2>Кой е Росен Симеонов?</h2>
-          <p>
-            Росен Симеонов е опитен професионалист в сферата на финансите и икономиката.
-            С дългогодишен международен опит, той се стреми да внедрява модерни и прагматични решения
-            за подобряване на бизнес средата и икономическото развитие на град Русе и Северна България.
-          </p>
-        </section>
-        
-        <section>
-          <h2>Ясна визия за град Русе</h2>
-          <p>
-            Икономическото бъдеще на Русе зависи от три основни стълба:
-          </p>
-          <ul>
-            <li><strong>Прозрачност и административна скорост:</strong> Дигитализация на услугите и съкращаване срока за реакция на общината към бизнеса.</li>
-            <li><strong>Инфраструктура с мисъл за бизнеса:</strong> Подготвени индустриални зони с пълна обезпеченост на комуникациите в региона.</li>
-            <li><strong>Диалог:</strong> Редовни срещи между местната власт и работодателите за съвместно решаване на проблемите.</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2>Дигитален бюлетин за Русе</h2>
-          <p>
-            Абонирайте се за официалния бюлетин на Росен Симеонов, за да получавате първи икономически анализи,
-            авторски статии и конкретни идеи за бъдещето на региона.
-          </p>
-        </section>
-
-        <section>
-          <h2>Контакти</h2>
-          <p>Официален имейл за кореспонденция: info@rosensimeonov.com</p>
-        </section>
+        <p>
+          Росен Симеонов е опитен професионалист в сферата на финансите и икономиката, с дългогодишен
+          международен опит и визия за икономическото развитие на град Русе и Северна България.
+        </p>
+        <p>Официален имейл за кореспонденция: info@rosensimeonov.com</p>
       </main>
       <footer style="text-align: center; padding: 20px; font-size: 0.8em; color: #666;">
         <p>&copy; 2026 Росен Симеонов. Всички права запазени.</p>
       </footer>
-    </div>
-    
-    <script type="module" src="/src/main.tsx" defer></script>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

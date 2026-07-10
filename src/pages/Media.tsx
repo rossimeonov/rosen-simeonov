@@ -3,6 +3,7 @@ import { ExternalLink, Calendar, Radio, Tv, Newspaper, MessageSquare } from 'luc
 import { mediaAppearances } from '../data';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
+import { YouTubeFacade } from '../components/YouTubeFacade';
 
 function getMediaIcon(source: string) {
   const srcLower = (source || '').toLowerCase();
@@ -97,15 +98,12 @@ function Media() {
       <section className="py-16 max-w-7xl mx-auto px-6">
         <div className="bg-white rounded-[2rem] border border-slate-200/60 p-6 md:p-8 shadow-xl relative overflow-hidden grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 aspect-video w-full rounded-2xl overflow-hidden shadow-md bg-slate-900 border border-slate-100">
-            <iframe 
-              className="w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-500"
-              src="https://www.youtube.com/embed/CJSZhxKOHno"
+            <YouTubeFacade
+              videoId="CJSZhxKOHno"
+              thumbnail="/images/kiss13-video-thumbnail.jpg"
               title="KISS 13 Официален Репортаж"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-            ></iframe>
+              className="w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+            />
           </div>
           
           <div className="lg:col-span-5 space-y-6 flex flex-col justify-center">

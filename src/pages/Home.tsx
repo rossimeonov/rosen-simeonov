@@ -1,14 +1,13 @@
 import { motion, useScroll, useSpring, AnimatePresence } from 'motion/react';
-import { ChevronRight, Globe, TrendingUp, MapPin, Plus, ArrowRight, Award, ShieldCheck, Landmark, ExternalLink } from 'lucide-react';
-import { useState } from 'react';
-import { visionPoints, blogPosts, mediaAppearances, faqs, FAQItem } from '../data';
+import { ChevronRight, Globe, TrendingUp, MapPin, Plus, ArrowRight, Award, ShieldCheck, Landmark, ExternalLink, Facebook, Linkedin, Music2 } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { visionPoints, blogPosts, mediaAppearances, faqs, FAQItem, socialLinks } from '../data';
 import { Contact } from '../components/Contact';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { IMAGES } from '../constants';
 import { Newsletter } from '../components/Newsletter';
 import { OptimizedImage } from '../components/OptimizedImage';
-import { TikTokFeed } from '../components/TikTokFeed';
 
 function FAQAccordion({ item }: { item: FAQItem }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -280,18 +279,39 @@ export function Home() {
         </div>
       </section>
 
-      {/* DYNAMIC TIKTOK FEED SECTION — АВТОМАТИЧНО ОБНОВЯВАЩ СЕ РЕД С ПОСЛЕДНИТЕ ВИДЕА */}
-      <section id="tiktok-videos" className="py-32 bg-white border-b border-slate-100">
+      {/* SOCIAL LINKS SECTION */}
+      <section id="social" className="py-32 bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <span className="section-label">Динамично съдържание</span>
+            <span className="section-label">Последвайте</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-slate-950">
-              Последни видеа в <span className="text-brand-600">TikTok</span>
+              Присъединете се в <span className="text-brand-600">социалните мрежи</span>
             </h2>
           </div>
 
-          {/* Извикване на новия асинхронен уиджет */}
-          <TikTokFeed />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {socialLinks.map((social) => {
+              const icons: Record<string, ReactNode> = {
+                Facebook: <Facebook size={24} />,
+                Linkedin: <Linkedin size={24} />,
+                Music2: <Music2 size={24} />,
+              };
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-8 bg-slate-50 flex items-center gap-4 hover:bg-brand-600 hover:text-white border border-slate-100 transition-all duration-500 rounded-[1.5rem]"
+                >
+                  <div className="text-brand-600 group-hover:text-white transition-colors">
+                    {icons[social.icon]}
+                  </div>
+                  <span className="text-sm font-black uppercase tracking-wider font-syne">{social.label}</span>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </section>
 
