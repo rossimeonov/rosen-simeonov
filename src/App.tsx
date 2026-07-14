@@ -12,6 +12,7 @@ import { Privacy } from './pages/Privacy';
 import { Cookies } from './pages/Cookies';
 import { NotFound } from './pages/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
+import { CookieBanner } from './components/CookieBanner';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <CookieBanner />
       </div>
     </Router>
   );
