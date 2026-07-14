@@ -7,8 +7,10 @@ import { Publications } from './pages/Publications';
 import { BlogPost } from './pages/BlogPost';
 import Media from './pages/Media';
 import { Contact } from './pages/Contact';
-import { Subscribe } from './pages/Subscribe'; 
-import { NotFound } from './pages/NotFound'; 
+import { Subscribe } from './pages/Subscribe';
+import { Privacy } from './pages/Privacy';
+import { Cookies } from './pages/Cookies';
+import { NotFound } from './pages/NotFound';
 import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
@@ -28,7 +30,9 @@ function App() {
             
             {/* Добавен липсващ маршрут за абониране */}
             <Route path="/subscribe" element={<Subscribe />} />
-            
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cookies" element={<Cookies />} />
+
             {/* Хващач на грешки */}
             <Route path="*" element={<NotFound />} />
           </Routes>
