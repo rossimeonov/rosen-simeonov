@@ -103,9 +103,11 @@ export function BlogPost() {
 
       {/* Hero Header */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <img 
-          src={post.image} 
-          alt={post.title} 
+        <img
+          src={post.image}
+          alt={post.title}
+          width={1600}
+          height={900}
           fetchPriority="high"
           decoding="sync"
           className="w-full h-full object-cover grayscale brightness-50"
@@ -160,6 +162,9 @@ export function BlogPost() {
                       alt={props.alt || ''}
                       className="w-full h-full object-cover"
                       fit="cover"
+                      width={1000}
+                      height={625}
+                      loading="lazy"
                     />
                   </div>
                 )
@@ -264,6 +269,9 @@ export function BlogPost() {
                         alt={other.title}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         fit="cover"
+                        width={160}
+                        height={160}
+                        loading="lazy"
                       />
                     </div>
                     <div>
@@ -287,11 +295,14 @@ export function BlogPost() {
               {allPosts.filter(p => p.id !== post.id).slice(0, 3).map(other => (
                 <Link key={other.id} to={`/publications/${other.slug}`} className="group block h-full">
                   <div className="aspect-[16/9] overflow-hidden bg-slate-50 border border-slate-100 rounded-[1.5rem] mb-6 relative">
-                    <OptimizedImage 
-                      src={other.image} 
-                      alt={other.title} 
+                    <OptimizedImage
+                      src={other.image}
+                      alt={other.title}
                       className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 font-sans"
                       fit="cover"
+                      width={1200}
+                      height={675}
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-brand-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>

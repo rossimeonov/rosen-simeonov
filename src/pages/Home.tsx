@@ -116,11 +116,17 @@ export function Home() {
           </div>
           
           <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0 w-full overflow-hidden border border-white/10 shadow-2xl bg-brand-900 rounded-[2rem]">
-            <OptimizedImage 
-              src={IMAGES.hero_portrait} 
-              alt="Росен Симеонов – икономически експерт за град Русе" 
+            <OptimizedImage
+              src={IMAGES.hero_portrait}
+              alt="Росен Симеонов – икономически експерт за град Русе"
               className="h-full w-full object-cover grayscale opacity-90"
               fit="cover"
+              width={1920}
+              height={1280}
+              srcWidths={[640, 1080, 1920]}
+              sizes="(min-width: 448px) 448px, 100vw"
+              loading="eager"
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -209,7 +215,7 @@ export function Home() {
               {blogPosts[0] && (
                 <Link to={`/publications/${blogPosts[0].slug}`} className="group block">
                   <div className="aspect-[16/9] overflow-hidden mb-8 rounded-[2rem] border border-slate-100 shadow-sm bg-slate-50">
-                    <OptimizedImage src={blogPosts[0].image} alt={blogPosts[0].title} className="h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700" fit="cover" />
+                    <OptimizedImage src={blogPosts[0].image} alt={blogPosts[0].title} className="h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-102 transition-all duration-700" fit="cover" width={1600} height={900} loading="lazy" />
                   </div>
                   <div className="flex gap-6 items-center mb-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     <span className="text-brand-600">{blogPosts[0].category}</span>

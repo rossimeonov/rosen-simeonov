@@ -81,10 +81,13 @@ export function Publications() {
         <div className="max-w-7xl mx-auto px-6">
            <Link to={`/publications/${filteredPosts[0].slug}`} className="grid lg:grid-cols-2 gap-16 items-center group">
               <div className="aspect-[16/10]">
-                 <OptimizedImage 
-                   src={filteredPosts[0].image} 
-                   alt={filteredPosts[0].title} 
+                 <OptimizedImage
+                   src={filteredPosts[0].image}
+                   alt={filteredPosts[0].title}
                    className="h-full w-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                   width={1600}
+                   height={1000}
+                   loading="eager"
                  />
               </div>
               <div className="space-y-6">
@@ -127,10 +130,13 @@ export function Publications() {
                   >
                     <Link to={`/publications/${post.slug}`} className="group block h-full">
                       <div className="aspect-[4/3] mb-8 relative">
-                          <OptimizedImage 
-                            src={post.image} 
-                            alt={post.title} 
-                            className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                          <OptimizedImage
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                            width={1200}
+                            height={900}
+                            loading="lazy"
                           />
                           <div className="absolute inset-0 bg-brand-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       </div>

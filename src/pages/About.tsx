@@ -10,8 +10,10 @@ import { Newsletter } from '../components/Newsletter';
 import { OptimizedImage } from '../components/OptimizedImage';
 
 // ДИРЕКТЕН ИМПОРТ НА ДИПЛОМИТЕ (Заобикаля евентуални грешки в constants.ts)
-import imgAchiever from '/images/top-achiever rosen-simeonov.webp';
-import imgGraduation from '/images/rosen-simeonov-graduation.jpg';
+import imgAchieverWebp from '/images/top-achiever-rosen-simeonov.webp';
+import imgAchieverJpg from '/images/top-achiever-rosen-simeonov.jpg';
+import imgGraduationWebp from '/images/rosen-simeonov-graduation.webp';
+import imgGraduationJpg from '/images/rosen-simeonov-graduation.jpg';
 
 interface FAQItem {
   question: string;
@@ -119,6 +121,11 @@ export function About() {
               alt="Росен Симеонов"
               className="h-full w-full object-cover grayscale opacity-95 hover:grayscale-0 transition-all duration-700"
               fit="cover"
+              width={1920}
+              height={1280}
+              srcWidths={[640, 1080, 1920]}
+              sizes="(min-width: 1024px) 560px, 100vw"
+              loading="eager"
             />
           </div>
         </div>
@@ -155,6 +162,9 @@ export function About() {
                 alt="Росен Симеонов поема поста общински председател"
                 className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
                 fit="cover"
+                width={1100}
+                height={825}
+                loading="lazy"
               />
             </div>
           </div>
@@ -170,6 +180,9 @@ export function About() {
               alt="Финансова конференция AlphaInvest"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
               fit="cover"
+              width={1100}
+              height={1650}
+              loading="lazy"
             />
           </div>
           <div className="lg:col-span-7 space-y-8">
@@ -230,6 +243,9 @@ export function About() {
                   alt="Mattison Cargo"
                   className="max-h-full max-w-full"
                   fit="contain"
+                  width={800}
+                  height={540}
+                  loading="lazy"
                 />
               </div>
               <div className="overflow-hidden border border-slate-100 aspect-square shadow-md rounded-2xl">
@@ -238,6 +254,9 @@ export function About() {
                   alt="Управленски опит"
                   className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-500"
                   fit="cover"
+                  width={900}
+                  height={600}
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -255,6 +274,9 @@ export function About() {
                 alt="Росен Симеонов - Черен колан по Кикбокс"
                 className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
                 fit="cover"
+                width={640}
+                height={765}
+                loading="lazy"
               />
             </div>
           </div>
@@ -305,18 +327,30 @@ export function About() {
           <div className="lg:col-span-5 space-y-8">
             <div className="grid grid-cols-2 gap-6">
               <div className="border border-slate-200 shadow-md bg-white p-2 rounded-2xl flex items-center justify-center overflow-hidden">
-                <img
-                  src={imgAchiever}
-                  alt="Top Achiever Academic Award"
-                  className="w-full h-auto object-contain"
-                />
+                <picture>
+                  <source type="image/webp" srcSet={imgAchieverWebp} />
+                  <img
+                    src={imgAchieverJpg}
+                    alt="Top Achiever Academic Award"
+                    width={500}
+                    height={317}
+                    loading="lazy"
+                    className="w-full h-auto object-contain"
+                  />
+                </picture>
               </div>
               <div className="border border-slate-200 shadow-md bg-white p-2 rounded-2xl flex items-center justify-center overflow-hidden">
-                <img
-                  src={imgGraduation}
-                  alt="MBA Graduation Diploma"
-                  className="w-full h-auto object-contain"
-                />
+                <picture>
+                  <source type="image/webp" srcSet={imgGraduationWebp} />
+                  <img
+                    src={imgGraduationJpg}
+                    alt="MBA Graduation Diploma"
+                    width={500}
+                    height={629}
+                    loading="lazy"
+                    className="w-full h-auto object-contain"
+                  />
+                </picture>
               </div>
             </div>
             <div className="w-full border border-slate-200 shadow-lg bg-white p-4 flex items-center justify-center overflow-hidden rounded-2xl">
@@ -325,6 +359,9 @@ export function About() {
                 alt="Political Academy Atanas Burov"
                 className="w-full h-auto object-contain"
                 fit="contain"
+                width={560}
+                height={438}
+                loading="lazy"
               />
             </div>
           </div>
@@ -358,6 +395,9 @@ export function About() {
               alt="Семейството на Росен Симеонов"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-500"
               fit="cover"
+              width={1085}
+              height={1267}
+              loading="lazy"
             />
           </div>
         </div>

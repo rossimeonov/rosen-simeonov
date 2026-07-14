@@ -4,6 +4,7 @@ import { mediaAppearances } from '../data';
 import { Newsletter } from '../components/Newsletter';
 import { Helmet } from 'react-helmet-async';
 import { YouTubeFacade } from '../components/YouTubeFacade';
+import { IMAGES } from '../constants';
 
 function getMediaIcon(source: string) {
   const srcLower = (source || '').toLowerCase();
@@ -68,12 +69,10 @@ function Media() {
         <title>Медийни участия и интервюта | Росен Симеонов</title>
         <meta name="description" content="Официален хронологичен архив с медийни изяви, интервюта, позиции и анализи на икономиста Росен Симеонов в национални и регионални медии." />
         <meta name="keywords" content="Росен Симеонов медии, интервю Росен Симеонов, Русе икономика, изявления Русе" />
-        <meta name="geo.region" content="BG-18" />
-        <meta name="geo.placename" content="Русе" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Медийни участия и интервюта | Росен Симеонов" />
         <meta property="og:description" content="Официален хронологичен архив с медийни изяви, интервюта и анализи на Росен Симеонов." />
-        <meta property="og:image" content="https://www.rosensimeonov.com/assets/hero_portrait.jpg" />
+        <meta property="og:image" content={IMAGES.hero_bg} />
         <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
       </Helmet>
       
