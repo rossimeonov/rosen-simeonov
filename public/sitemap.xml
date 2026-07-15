@@ -2,59 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://rosensimeonov.com/</loc>
+    <loc>https://www.rosensimeonov.com/</loc>
     <priority>1.00</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/about</loc>
+    <loc>https://www.rosensimeonov.com/about</loc>
     <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/publications</loc>
+    <loc>https://www.rosensimeonov.com/publications</loc>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/media</loc>
+    <loc>https://www.rosensimeonov.com/media</loc>
     <priority>0.80</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/contact</loc>
+    <loc>https://www.rosensimeonov.com/contact</loc>
     <priority>0.60</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/subscribe</loc>
+    <loc>https://www.rosensimeonov.com/subscribe</loc>
     <priority>0.50</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/privacy</loc>
+    <loc>https://www.rosensimeonov.com/privacy</loc>
     <priority>0.30</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/cookies</loc>
+    <loc>https://www.rosensimeonov.com/cookies</loc>
     <priority>0.30</priority>
   </url>
 
   <!-- Publications -->
 
   <url>
-    <loc>https://rosensimeonov.com/publications/economic-stagnation-of-ruse</loc>
+    <loc>https://www.rosensimeonov.com/publications/obshtina-ruse-mediini-dogovori</loc>
     <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/publications/miliohinite-na-ruse-obshtestveni-poruchki</loc>
+    <loc>https://www.rosensimeonov.com/publications/economic-stagnation-of-ruse</loc>
     <priority>0.90</priority>
   </url>
 
   <url>
-    <loc>https://rosensimeonov.com/publications/duhat-na-gergyovden-grajdanska-hrabrost-ruse</loc>
+    <loc>https://www.rosensimeonov.com/publications/miliohinite-na-ruse-obshtestveni-poruchki</loc>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rosensimeonov.com/publications/duhat-na-gergyovden-grajdanska-hrabrost-ruse</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.rosensimeonov.com/publications/sreshta-s-biznesa-v-oblast-ruse-14-april</loc>
     <priority>0.80</priority>
   </url>
 
