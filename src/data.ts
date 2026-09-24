@@ -71,8 +71,14 @@ export const blogPosts = allBlogPosts;
 
 // Обновените и подредени медийни участия
 export const mediaAppearances: MediaItem[] = [
-  { 
-    source: 'Rousse.info', 
+  {
+    source: 'RuseMedia',
+    description: 'Съветници от ДБ: Защо се появиха допълнителни разходи за басейна в Русе?',
+    link: 'https://www.youtube.com/watch?v=JCx0hKpYaRs',
+    date: '24.09.2026'
+  },
+  {
+    source: 'Rousse.info',
     description: 'Коалиция ПП-ДБ регистрира листата си с кандидати в Русе.', 
     link: 'https://rousse.info/koalicziya-prodalzhavame-promyanata-demokratichna-balgariya-registrira-lista-ot-kandidati-za-narodni-predstaviteli-v-19-i-mir-ruse-video/',
     date: '17.03.2026' 

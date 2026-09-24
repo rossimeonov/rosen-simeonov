@@ -98,26 +98,26 @@ function Media() {
         <div className="bg-white rounded-[2rem] border border-slate-200/60 p-6 md:p-8 shadow-xl relative overflow-hidden grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 aspect-video w-full rounded-2xl overflow-hidden shadow-md bg-slate-900 border border-slate-100">
             <YouTubeFacade
-              videoId="CJSZhxKOHno"
-              thumbnail="/images/kiss13-video-thumbnail.jpg"
-              title="KISS 13 Официален Репортаж"
+              videoId="JCx0hKpYaRs"
+              thumbnail="https://img.youtube.com/vi/JCx0hKpYaRs/maxresdefault.jpg"
+              title="Съветници от ДБ: Защо се появиха допълнителни разходи за басейна в Русе?"
               className="w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-500"
             />
           </div>
-          
+
           <div className="lg:col-span-5 space-y-6 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-50 text-brand-700 rounded-full text-[10px] font-black uppercase tracking-wider w-max">
               <Tv size={12} /> Видео акцент • Репортаж
             </div>
             <h2 className="text-2xl md:text-3xl font-syne font-extrabold text-slate-950 tracking-tight leading-tight">
-              ПП - ДБ дават сделката за големия ТИР паркинг в Русе на прокуратурата
+              Съветници от ДБ: Защо се появиха допълнителни разходи за басейна в Русе?
             </h2>
             <p className="text-slate-600 font-sans font-light text-base leading-relaxed">
-              Официална позиция и икономически анализ относно прозрачността на управление на общинските активи на територията на град Русе.
+              Общинските съветници от Демократична България коментират причините за допълнителните разходи по проекта за басейна в Русе.
             </p>
             <div className="pt-2">
-              <a href="https://kiss13.net/news/ruse/pp-db-davat-sdelkata-za-golemiya-tir-parking-v-ruse-na-prokuraturata" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-600 hover:text-slate-950 transition-colors border-b-2 border-brand-600 pb-1">
-                Официален репортаж в KISS 13 <ExternalLink size={14} />
+              <a href="https://www.youtube.com/watch?v=JCx0hKpYaRs" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-600 hover:text-slate-950 transition-colors border-b-2 border-brand-600 pb-1">
+                Гледайте видеото в YouTube <ExternalLink size={14} />
               </a>
             </div>
           </div>
