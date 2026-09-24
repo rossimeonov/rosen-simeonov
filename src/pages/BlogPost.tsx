@@ -7,6 +7,9 @@ import { getAllPosts } from '../blogUtils';
 import { useState, FormEvent } from 'react';
 import { Newsletter } from '../components/Newsletter';
 import { OptimizedImage } from '../components/OptimizedImage';
+import { YouTubeFacade } from '../components/YouTubeFacade';
+
+const YOUTUBE_URL_REGEX = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/;
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -167,7 +170,29 @@ export function BlogPost() {
                       loading="lazy"
                     />
                   </div>
-                )
+                ),
+                a: ({ node, href, children, ...props }) => {
+                  const youtubeMatch = href?.match(YOUTUBE_URL_REGEX);
+                  if (youtubeMatch) {
+                    const videoId = youtubeMatch[1];
+                    const title = typeof children === 'string' ? children : post.title;
+                    return (
+                      <div className="w-full aspect-video overflow-hidden rounded-2xl my-10 shadow-md bg-slate-900 border border-slate-100">
+                        <YouTubeFacade
+                          videoId={videoId}
+                          thumbnail={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                          title={title}
+                          className="w-full h-full"
+                        />
+                      </div>
+                    );
+                  }
+                  return (
+                    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                      {children}
+                    </a>
+                  );
+                }
               }}
             >
               {post.content}
