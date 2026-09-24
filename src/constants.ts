@@ -19,6 +19,7 @@ export const IMAGES = {
   blog_business_meeting_db: "/images/business-meeting-ruse-db.webp",
 dnevnik_medii_mulchanie: "/images/dnevnik-medii-mulchanie.jpg",
   blog_dohodno_zdanie: "/images/preskonferencia-dohodno-zdanie.jpg",
+  blog_dohodno_zdanie_secondary: "/images/dohodno-zdanie.jpg",
 
   // Биография / За мен 
   about_main: "/images/rosen-simeonov-ruse.webp",
