@@ -4,6 +4,7 @@ import { gergyovdenPost } from './gergyovden';
 import { publicProcurementPost } from './publicProcurement';
 // 1. Добавяме импорта на новата ти статия:
 import { mediaContractsPost } from './medii';
+import { dohodnoZdaniePost } from './dohodnoZdanie';
 
 // ==========================================
 // МЕДИЙНИ УЧАСТИЯ И ИНТЕРВЮТА
@@ -52,7 +53,8 @@ export const mediaAppearances: MediaAppearance[] = [
 // БЛОГ ПУБЛИКАЦИИ (СТАТИИ)
 // ==========================================
 export const blogPosts = [
-  mediaContractsPost, // 2. Слагаме я най-отгоре, за да излезе като най-нова и първа на сайта!
+  dohodnoZdaniePost, // Най-нова статия – излиза първа на сайта
+  mediaContractsPost,
   gergyovdenPost,
   economicStagnationPost,
   publicProcurementPost,
