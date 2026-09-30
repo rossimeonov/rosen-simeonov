@@ -1,6 +1,7 @@
 import { businessMeetingPost } from './businessMeeting';
 import { economicStagnationPost } from './economicStagnation';
 import { gergyovdenPost } from './gergyovden';
+import { kandevRusePost } from './kandevRuse';
 import { publicProcurementPost } from './publicProcurement';
 // 1. Добавяме импорта на новата ти статия:
 import { mediaContractsPost } from './medii';
@@ -53,7 +54,8 @@ export const mediaAppearances: MediaAppearance[] = [
 // БЛОГ ПУБЛИКАЦИИ (СТАТИИ)
 // ==========================================
 export const blogPosts = [
-  dohodnoZdaniePost, // Най-нова статия – излиза първа на сайта
+  kandevRusePost, // Най-нова статия
+  dohodnoZdaniePost,
   mediaContractsPost,
   gergyovdenPost,
   economicStagnationPost,
