@@ -168,6 +168,7 @@ export function BlogPost() {
                       width={1000}
                       height={625}
                       loading="lazy"
+                      fallbackSrc={null}
                     />
                   </div>
                 ),

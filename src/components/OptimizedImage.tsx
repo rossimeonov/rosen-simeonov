@@ -14,6 +14,8 @@ interface OptimizedImageProps {
   // Само за hero-подобни случаи: генерира <picture> srcset с няколко ширини
   srcWidths?: number[];
   sizes?: string;
+  // При липса на изображение може да бъде зададен конкретен fallback; null = без fallback
+  fallbackSrc?: string | null;
 }
 
 const FALLBACK_SRC = '/images/ruse.webp';
@@ -33,6 +35,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   fetchPriority = 'auto',
   srcWidths,
   sizes,
+  fallbackSrc = FALLBACK_SRC,
 }) => {
   const [currentSrc, setCurrentSrc] = useState(src);
   const isWebpSource = src.toLowerCase().endsWith('.webp');
@@ -42,8 +45,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   }, [src]);
 
   const handleError = () => {
-    if (currentSrc !== FALLBACK_SRC) {
-      setCurrentSrc(FALLBACK_SRC);
+    if (fallbackSrc !== null && currentSrc !== fallbackSrc) {
+      setCurrentSrc(fallbackSrc);
     }
   };
 
