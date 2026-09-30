@@ -35,6 +35,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   sizes,
 }) => {
   const [currentSrc, setCurrentSrc] = useState(src);
+  const isWebpSource = src.toLowerCase().endsWith('.webp');
 
   useEffect(() => {
     setCurrentSrc(src);
@@ -47,10 +48,31 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   };
 
   const base = withoutExt(currentSrc);
-
   const webpSrcSet = srcWidths?.map((w) => `${base}-${w}.webp ${w}w`).join(', ');
   const jpgSrcSet = srcWidths?.map((w) => `${base}-${w}.jpg ${w}w`).join(', ');
   const jpgFallback = srcWidths ? `${base}-${srcWidths[srcWidths.length - 1]}.jpg` : `${base}.jpg`;
+
+  if (!isWebpSource) {
+    return (
+      <div className={`overflow-hidden rounded-lg flex-shrink-0 w-full h-full ${className}`}>
+        <img
+          src={currentSrc}
+          srcSet={jpgSrcSet}
+          sizes={srcWidths ? sizes : undefined}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          fetchPriority={fetchPriority}
+          onError={handleError}
+          className="w-full h-full block"
+          style={{
+            objectFit: fit,
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`overflow-hidden rounded-lg flex-shrink-0 w-full h-full ${className}`}>
