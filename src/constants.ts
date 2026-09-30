@@ -20,8 +20,8 @@ export const IMAGES = {
 dnevnik_medii_mulchanie: "/images/dnevnik-medii-mulchanie.jpg",
   blog_dohodno_zdanie: "/images/preskonferencia-dohodno-zdanie.jpg",
   blog_dohodno_zdanie_secondary: "/images/dohodno-zdanie.jpg",
-  blog_kandev_ruse: "/images/kandev-shtab-ruse-otkrivane.jpg",
-  blog_kandev_ruse_speech: "/images/kandev-shtab-ruse-izkazvane.jpg",
+  blog_kandev_ruse: "/images/ruse.webp",
+  blog_kandev_ruse_speech: "/images/rosen-simeonov-ruse-1920.jpg",
   blog_kandev_ruse_poster: "/images/kandev-shtab-ruse-plakat-4.jpg",
 
   // Биография / За мен 
